@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="">
+    <meta name="theme-color" content="#2563EB">
+    <title>Koleksi Cerita & Buku Bergambar Anak — CintaBaca</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#EEF2FF', 100: '#E0E7FF', 200: '#C7D2FE', 300: '#A5B4FC',
+                            400: '#818CF8', 500: '#6366F1', 600: '#4F46E5', 700: '#4338CA',
+                            800: '#3730A3', 900: '#312E81'
+                        }
+                    },
+                    boxShadow: {
+                        premium: '0 1px 2px rgba(15,23,42,0.04), 0 20px 40px -12px rgba(79,70,229,0.18)',
+                        soft: '0 1px 2px rgba(15,23,42,0.04), 0 8px 24px -8px rgba(15,23,42,0.10)'
+                    },
+                    borderRadius: { '2xl': '1rem', '3xl': '1.5rem' }
+                }
+            }
+        }
+    </script>
+
+    <!-- Fonts: Plus Jakarta Sans & Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --indigo: #4F46E5;
+            --amber: #F59E0B;
+            --teal: #0D9488;
+            --surface-warm: #FFFDF9;
+            --ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        body { font-family: 'Plus Jakarta Sans', 'DM Sans', sans-serif; color: #334155; }
+        .font-display { font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif; letter-spacing: -0.02em; }
+        .line-clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .filter-level-btn.active {
+            box-shadow: 0 10px 25px -5px rgba(79, 70, 229, 0.25);
+        }
+        .scroll-progress { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(to right, #4F46E5, #818CF8); box-shadow: 0 0 8px rgba(79,70,229,0.5); z-index: 9999; transition: width 0.1s; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #F8FAFC; }
+        ::-webkit-scrollbar-thumb { background: #C7D2FE; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #4F46E5; }
+    </style>
+</head>
+<body class="bg-white text-slate-800 antialiased">
+
+    <!-- Scroll Progress -->
+    <div class="scroll-progress" id="scrollProgress" style="width:0%"></div>
+
+    <!-- Navbar -->
+    <nav class="sticky top-0 z-50 bg-[#FFFCF7]/95 backdrop-blur-md border-b border-orange-100/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+
+                <!-- Logo -->
+                <a href="./index.html" class="flex items-center gap-2.5 cursor-pointer select-none py-1">
+                    <div class="w-10 h-10 rounded-xl flex items-center justify-center overflow-hidden bg-indigo-50/60 p-1">
+                        <img src="./images/Transparent.png" alt="Logo" class="w-full h-full object-contain">
+                    </div>
+                    <div>
+                        <div class="font-display font-bold text-slate-900 text-base leading-tight tracking-tight">CintaBaca</div>
+                        <div class="text-[11px] text-indigo-600/80 font-semibold leading-tight">Perpustakaan Digital</div>
+                    </div>
+                </a>
+
+                <!-- Desktop nav -->
+                <div class="hidden md:flex items-center gap-7">
+                    <a href="./index.html" class="nav-link text-sm font-semibold text-slate-600 hover:text-indigo-600">Beranda</a>
+                    <a href="./koleksi.html" class="nav-link text-sm font-bold text-indigo-600">Koleksi</a>
+                    <a href="./index.html" class="nav-link text-sm font-semibold text-slate-600 hover:text-indigo-600">Berita</a>
+                    <a href="./index.html" class="nav-link text-sm font-semibold text-slate-600 hover:text-indigo-600">Tentang</a>
+                </div>
+
+                <!-- CTA + Language switcher + Mobile toggle -->
+                <div class="flex items-center gap-3">
+                    <div data-language-switcher class="hidden md:flex items-center rounded-full border border-slate-200 bg-slate-50 p-0.5 shadow-xs">
+                        <button type="button" data-lang="id" class="rounded-full px-2.5 py-1 text-xs font-bold transition-colors bg-indigo-600 text-white">ID</button>
+                        <button type="button" data-lang="en" class="rounded-full px-2.5 py-1 text-xs font-bold transition-colors text-slate-600">EN</button>
+                    </div>
+
+                    <a href="./index.html" class="hidden md:inline-flex items-center gap-1.5 text-xs font-bold text-slate-700 hover:text-indigo-600 transition-colors px-4 py-2 rounded-full border border-slate-200 hover:border-indigo-300 bg-white">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
+                            <polyline points="10 17 15 12 10 7"/>
+                            <line x1="15" y1="12" x2="3" y2="12"/>
+                        </svg>
+                        <span>Masuk</span>
+                    </a>
+                    <a href="./index.html" class="hidden md:inline-flex items-center gap-1.5 text-xs font-bold text-white px-5 py-2 rounded-full transition-all duration-200 bg-indigo-600 hover:bg-indigo-700 shadow-sm hover:shadow-md hover:-translate-y-0.5">
+                        <span>Daftar Gratis</span>
+                    </a>
+                                    
+                    <!-- Mobile menu button -->
+                    <button onclick="toggleMobile()" class="md:hidden p-2 rounded-lg text-gray-500 hover:bg-gray-100 transition-colors">
+                        <svg id="menu-icon-open" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+                        </svg>
+                        <svg id="menu-icon-close" class="hidden" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 px-4 py-3 space-y-1">
+            <a href="./index.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition-colors">Beranda</a>
+            <a href="./koleksi.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-bold text-indigo-600 bg-indigo-50 transition-colors">Koleksi</a>
+            <a href="./index.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition-colors">Berita</a>
+            <a href="./index.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition-colors">Tentang</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section (Vibrant Storybook Sky Theme) -->
+        <section class="relative overflow-hidden pt-10 sm:pt-12 lg:pt-14 pb-0" style="background: linear-gradient(135deg, #1E3A8A 0%, #1D4ED8 45%, #2563EB 85%, #3B82F6 100%);">
+            <div class="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-blue-400/20 blur-3xl pointer-events-none"></div>
+            <div class="absolute -bottom-24 -right-24 w-96 h-96 rounded-full bg-indigo-300/20 blur-3xl pointer-events-none"></div>
+            <div class="absolute top-1/2 left-1/3 w-64 h-64 rounded-full bg-amber-300/10 blur-2xl pointer-events-none"></div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="flex flex-wrap items-center justify-between gap-3 mb-6">
+                    <div class="flex items-center gap-2 text-blue-200 text-xs sm:text-sm font-medium">
+                        <a href="./index.html" class="hover:text-white transition-colors flex items-center gap-1">
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                                <polyline points="9 22 9 12 15 12 15 22"/>
+                            </svg>
+                            <span>Beranda</span>
+                        </a>
+                        <span>/</span>
+                        <span class="text-amber-300 font-bold">Koleksi Cerita</span>
+                    </div>
+
+                    <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-xs font-semibold shadow-xs">
+                        <span class="text-amber-300 animate-pulse">✨</span>
+                        <span>Pojok Baca Sahabat Kecil</span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
+                    <div class="lg:col-span-7 pb-8 sm:pb-10 lg:pb-12">
+                        <h1 class="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-tight tracking-tight mb-4">
+                            <span>Petualangan Dongeng Seru &</span><br>
+                            <span class="text-amber-300">Buku Cerita Bergambar!</span>
+                        </h1>
+                        <p class="text-blue-100 text-sm sm:text-base lg:text-lg max-w-2xl leading-relaxed mb-6">
+                            Pilih kisah favoritmu: fabel hewan yang lucu, petualangan luar angkasa, dongeng rakyat nusantara, dan sains seru. Semuanya siap dibaca gratis kapan pun!
+                        </p>
+
+                        <div class="flex flex-wrap items-center gap-2 sm:gap-3 text-xs">
+                            <div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/15 backdrop-blur-md text-white font-medium border border-white/15">
+                                <svg class="w-4 h-4 text-amber-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                </svg>
+                                <span>Ilustrasi Cerah & Penuh Warna</span>
+                            </div>
+                            <div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/15 backdrop-blur-md text-white font-medium border border-white/15">
+                                <svg class="w-4 h-4 text-emerald-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                                </svg>
+                                <span>100% Aman & Ramah Anak</span>
+                            </div>
+                            <div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/15 backdrop-blur-md text-white font-medium border border-white/15">
+                                <svg class="w-4 h-4 text-cyan-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                                </svg>
+                                <span>Tersedia 3 Jenjang Usia</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-5 flex justify-center lg:justify-end items-end self-end">
+                        <div class="relative flex items-end justify-center lg:justify-end">
+                            <img 
+                                src="./images/reading-girl.png" 
+                                alt="Sahabat Kecil Membaca Buku" 
+                                class="w-auto h-64 sm:h-72 lg:h-80 xl:h-[350px] max-w-full object-contain object-bottom block select-none pointer-events-none drop-shadow-2xl"
+                            >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reading Levels Selector (Interactive 4-Card Selector) -->
+        <section class="bg-[#FFFDF9] border-b border-orange-100/70 py-6 sm:py-8 sticky top-16 z-30 shadow-xs backdrop-blur-md bg-opacity-95">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+                    <div>
+                        <h2 class="font-display text-sm sm:text-base font-extrabold text-slate-900 flex items-center gap-2">
+                            <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
+                            <span>Pilih Jenjang Membaca Si Kecil:</span>
+                        </h2>
+                        <p class="text-xs text-slate-500">Sesuaikan cerita dengan usia dan kenyamanan membaca anak</p>
+                    </div>
+
+                    <div class="flex items-center gap-2 text-xs font-bold text-slate-600 bg-white px-3 py-1.5 rounded-xl border border-orange-200/60 shadow-2xs w-fit">
+                        <svg class="w-4 h-4 text-amber-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                        </svg>
+                        <span>Menampilkan <span id="visible-count" class="text-indigo-600 font-extrabold">8</span> Cerita</span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-3" id="level-selector-tabs">
+                    <button 
+                        type="button" 
+                        data-audience="semua" 
+                        onclick="setLevelFilter('semua', this)"
+                        class="filter-level-btn active p-3 rounded-2xl border text-left transition-all duration-200 bg-indigo-600 border-indigo-600 text-white shadow-sm flex flex-col justify-between"
+                    >
+                        <div class="flex items-center justify-between mb-1.5">
+                            <span class="text-xs font-bold uppercase tracking-wider opacity-90">Semua Level</span>
+                            <span class="text-base">🌈</span>
+                        </div>
+                        <div class="font-display font-extrabold text-sm sm:text-base leading-tight">Seluruh Cerita</div>
+                        <div class="text-[11px] opacity-80 mt-0.5 truncate">Koleksi lengkap perpustakaan</div>
+                    </button>
+
+                    <button 
+                        type="button" 
+                        data-audience="anak" 
+                        onclick="setLevelFilter('anak', this)"
+                        class="filter-level-btn p-3 rounded-2xl border text-left transition-all duration-200 bg-[#FFFCF7] border-orange-200/80 hover:border-amber-400 text-slate-800 hover:bg-amber-50/50 flex flex-col justify-between"
+                    >
+                        <div class="flex items-center justify-between mb-1.5">
+                            <span class="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-amber-800 bg-amber-100/90 px-2 py-0.5 rounded-md border border-amber-200/80">
+                                Level 1 • 3 - 8 Thn
+                            </span>
+                            <span class="text-base">🧸</span>
+                        </div>
+                        <div class="font-display font-extrabold text-sm sm:text-base text-slate-900 leading-tight">Pembaca Pemula</div>
+                        <div class="text-[11px] text-slate-500 mt-0.5 truncate">Fabel bergambar & rima kata</div>
+                    </button>
+
+                    <button 
+                        type="button" 
+                        data-audience="remaja" 
+                        onclick="setLevelFilter('remaja', this)"
+                        class="filter-level-btn p-3 rounded-2xl border text-left transition-all duration-200 bg-[#FFFCF7] border-orange-200/80 hover:border-indigo-400 text-slate-800 hover:bg-indigo-50/50 flex flex-col justify-between"
+                    >
+                        <div class="flex items-center justify-between mb-1.5">
+                            <span class="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-indigo-900 bg-indigo-100/90 px-2 py-0.5 rounded-md border border-indigo-200/80">
+                                Level 2 • 9 - 16 Thn
+                            </span>
+                            <span class="text-base">🚀</span>
+                        </div>
+                        <div class="font-display font-extrabold text-sm sm:text-base text-slate-900 leading-tight">Pembaca Mandiri</div>
+                        <div class="text-[11px] text-slate-500 mt-0.5 truncate">Petualangan, misteri & sains</div>
+                    </button>
+
+                    <button 
+                        type="button" 
+                        data-audience="dewasa" 
+                        onclick="setLevelFilter('dewasa', this)"
+                        class="filter-level-btn p-3 rounded-2xl border text-left transition-all duration-200 bg-[#FFFCF7] border-orange-200/80 hover:border-teal-400 text-slate-800 hover:bg-teal-50/50 flex flex-col justify-between"
+                    >
+                        <div class="flex items-center justify-between mb-1.5">
+                            <span class="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-teal-900 bg-teal-100/90 px-2 py-0.5 rounded-md border border-teal-200/80">
+                                Level 3 • 17+ Thn
+                            </span>
+                            <span class="text-base">📖</span>
+                        </div>
+                        <div class="font-display font-extrabold text-sm sm:text-base text-slate-900 leading-tight">Pembaca Mahir</div>
+                        <div class="text-[11px] text-slate-500 mt-0.5 truncate">Sastra klasik & inspirasi</div>
+                    </button>
+                </div>
+
+                <!-- Search Bar & Category Tags Bar -->
+                <div class="mt-4 pt-4 border-t border-orange-100/60 flex flex-col lg:flex-row gap-3 items-stretch lg:items-center justify-between">
+                    <div class="relative w-full lg:w-80">
+                        <svg class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                        </svg>
+                        <input 
+                            id="search-koleksi" 
+                            type="text" 
+                            placeholder="Cari dongeng kancil, sains, petualangan..." 
+                            class="w-full pl-10 pr-9 py-2.5 text-xs sm:text-sm text-slate-800 bg-white border border-orange-200/70 rounded-xl outline-none transition-all hover:border-indigo-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 shadow-2xs placeholder-slate-400"
+                        >
+                        <button 
+                            id="search-clear-btn" 
+                            type="button" 
+                            onclick="clearSearch()" 
+                            class="hidden absolute right-2.5 top-1/2 -translate-y-1/2 p-1 text-slate-400 hover:text-slate-600 rounded-full hover:bg-slate-100 transition-colors"
+                        >
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="flex items-center gap-1.5 overflow-x-auto pb-1 lg:pb-0" id="category-pills">
+                        <button type="button" class="cat-pill active flex-shrink-0 inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold transition-all bg-indigo-600 text-white shadow-2xs border border-indigo-600" data-cat="semua" onclick="filterCategory('semua')">
+                            <span>🌟</span>
+                            <span>Semua Kategori</span>
+                        </button>
+                        <button type="button" class="cat-pill flex-shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold transition-all bg-white text-slate-600 hover:bg-orange-50 border border-orange-200/60 shadow-2xs hover:border-amber-400" data-cat="Permainan Tradisional" onclick="filterCategory('Permainan Tradisional')">
+                            <span>🪁</span>
+                            <span>Permainan Tradisional</span>
+                        </button>
+                        <button type="button" class="cat-pill flex-shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold transition-all bg-white text-slate-600 hover:bg-orange-50 border border-orange-200/60 shadow-2xs hover:border-amber-400" data-cat="Cerita Fabel" onclick="filterCategory('Cerita Fabel')">
+                            <span>🦊</span>
+                            <span>Cerita Fabel</span>
+                        </button>
+                        <button type="button" class="cat-pill flex-shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold transition-all bg-white text-slate-600 hover:bg-orange-50 border border-orange-200/60 shadow-2xs hover:border-amber-400" data-cat="Sains" onclick="filterCategory('Sains')">
+                            <span>🚀</span>
+                            <span>Sains & Antariksa</span>
+                        </button>
+                        <button type="button" class="cat-pill flex-shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold transition-all bg-white text-slate-600 hover:bg-orange-50 border border-orange-200/60 shadow-2xs hover:border-amber-400" data-cat="Petualangan" onclick="filterCategory('Petualangan')">
+                            <span>🧭</span>
+                            <span>Petualangan</span>
+                        </button>
+                        <button type="button" class="cat-pill flex-shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold transition-all bg-white text-slate-600 hover:bg-orange-50 border border-orange-200/60 shadow-2xs hover:border-amber-400" data-cat="Cerita Rakyat" onclick="filterCategory('Cerita Rakyat')">
+                            <span>🏰</span>
+                            <span>Cerita Rakyat</span>
+                        </button>
+                        <button type="button" class="cat-pill flex-shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold transition-all bg-white text-slate-600 hover:bg-orange-50 border border-orange-200/60 shadow-2xs hover:border-amber-400" data-cat="Persahabatan" onclick="filterCategory('Persahabatan')">
+                            <span>🤝</span>
+                            <span>Persahabatan</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Storybook Grid Section -->
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
+            <div id="active-filter-indicator" class="hidden mb-6 items-center justify-between p-3 rounded-2xl bg-indigo-50/70 border border-indigo-100 text-xs text-indigo-900">
+                <div class="flex items-center gap-2">
+                    <span class="text-base">🔍</span>
+                    <span>Menampilkan hasil filter: <strong id="filter-description">Semua Cerita</strong></span>
+                </div>
+                <button type="button" onclick="resetAllFilters()" class="font-bold text-indigo-600 hover:text-indigo-800 underline flex items-center gap-1">
+                    <span>Reset Filter</span>
+                </button>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-6" id="koleksi-grid"></div>
+
+            <div id="empty-state" class="hidden text-center py-16 px-4 bg-[#FFFCF7] rounded-3xl border border-dashed border-orange-200 my-8">
+                <div class="w-20 h-20 mx-auto rounded-3xl bg-amber-100 text-amber-600 flex items-center justify-center text-3xl mb-4 shadow-xs">
+                    🙈
+                </div>
+                <h3 class="font-display font-extrabold text-slate-900 text-lg sm:text-xl mb-2">
+                    Wah, Bukunya Sedang Sembunyi!
+                </h3>
+                <p class="text-xs sm:text-sm text-slate-500 max-w-md mx-auto mb-6">
+                    Cerita yang kamu cari belum ditemukan. Coba gunakan kata kunci lain seperti "kancil", "bintang", atau pilih kategori lain di atas.
+                </p>
+                <button type="button" onclick="resetAllFilters()" class="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl text-xs sm:text-sm font-bold text-white bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 transition-all shadow-sm">
+                    <span>Tampilkan Semua Cerita</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Engaging Child & Parent CTA Section -->
+        <section class="py-14 sm:py-16 relative overflow-hidden bg-[#FFF8F0]/80 border-t border-orange-100/70">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-100 border border-amber-200 text-amber-900 text-xs font-bold uppercase tracking-wider mb-4">
+                    <span>🌟</span>
+                    <span>Mari Gemar Membaca Bersama</span>
+                </div>
+                <h2 class="font-display text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 mb-3">
+                    Suka Membaca? Buat Rak Buku Impianmu!
+                </h2>
+                <p class="text-slate-600 text-sm sm:text-base max-w-xl mx-auto mb-8 leading-relaxed">
+                    Daftar gratis untuk menyimpan buku cerita kesukaan, menandai halaman terakhir, dan dapatkan rekomendasi buku seru lainnya.
+                </p>
+                <div class="flex flex-wrap justify-center gap-3 sm:gap-4">
+                    <a href="./index.html" class="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-7 rounded-2xl transition-all duration-200 shadow-md hover:shadow-lg hover:-translate-y-0.5 text-xs sm:text-sm">
+                        <span>Daftar Sahabat Baca (Gratis)</span>
+                    </a>
+                    <a href="./index.html" class="inline-flex items-center gap-2 bg-white hover:bg-orange-50 border border-orange-200/80 text-slate-700 font-bold py-3 px-7 rounded-2xl transition-all duration-200 shadow-2xs hover:border-indigo-300 hover:text-indigo-600 text-xs sm:text-sm">
+                        <span>Kembali ke Beranda</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer style="background:#0F0E2A" class="text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-xs text-gray-400">
+            <p>© 2026 CintaBaca Digital. Koleksi Cerita & Buku Bergambar Ramah Anak.</p>
+        </div>
+    </footer>
+
+    <script>
+        const DUMMY_COVERS = [
+            './images/dummy-books/cover-1.jpg',
+            './images/dummy-books/cover-2.jpg',
+            './images/dummy-books/cover-3.jpg',
+            './images/dummy-books/cover-4.jpg',
+            './images/dummy-books/cover-5.jpg',
+            './images/dummy-books/cover-6.jpg',
+        ];
+
+        const ALL_BOOKS = [
+            {
+                id: 'dummy-tradisional',
+                title: 'Ceria di Kampung Kami: Permainan Tradisional',
+                author: 'Kak Rian & Sahabat Budaya',
+                category_name: 'Permainan Tradisional',
+                target_audience: 'anak',
+                cover_url: './images/dummy-books/cover-permainan-tradisional.jpg',
+                total_pages: 20,
+                rating: 5.0,
+                url: './detail-buku.html'
+            },
+            {
+                id: 'dummy-1',
+                title: 'Petualangan Kancil & Sahabat Rimba',
+                author: 'Rian Andika',
+                category_name: 'Cerita Fabel',
+                target_audience: 'anak',
+                cover_url: DUMMY_COVERS[0],
+                total_pages: 16,
+                rating: 4.9,
+                url: './detail-buku.html'
+            },
+            {
+                id: 'dummy-2',
+                title: 'Menjelajah Bintang Bersama Luna',
+                author: 'Dewi Lestari M.',
+                category_name: 'Sains & Antariksa',
+                target_audience: 'anak',
+                cover_url: DUMMY_COVERS[1],
+                total_pages: 18,
+                rating: 5.0,
+                url: './detail-buku.html'
+            },
+            {
+                id: 'dummy-3',
+                title: 'Sahabat Biru di Samudra Luas',
+                author: 'Budi Setiawan',
+                category_name: 'Alam & Satwa Laut',
+                target_audience: 'anak',
+                cover_url: DUMMY_COVERS[2],
+                total_pages: 14,
+                rating: 4.8,
+                url: './detail-buku.html'
+            },
+            {
+                id: 'dummy-4',
+                title: 'Rahasia Rumah Pohon Senja',
+                author: 'Sarah Maharani',
+                category_name: 'Petualangan',
+                target_audience: 'remaja',
+                cover_url: DUMMY_COVERS[3],
+                total_pages: 32,
+                rating: 4.9,
+                url: './detail-buku.html'
+            },
+            {
+                id: 'dummy-5',
+                title: 'Legenda Cendrawasih Emas',
+                author: 'I Made Suwarta',
+                category_name: 'Cerita Rakyat',
+                target_audience: 'remaja',
+                cover_url: DUMMY_COVERS[4],
+                total_pages: 24,
+                rating: 4.9,
+                url: './detail-buku.html'
+            },
+            {
+                id: 'dummy-6',
+                title: 'Belajar Membaca di Ladang Bunga',
+                author: 'Aisyah Nurul',
+                category_name: 'Persahabatan',
+                target_audience: 'anak',
+                cover_url: DUMMY_COVERS[5],
+                total_pages: 12,
+                rating: 5.0,
+                url: './detail-buku.html'
+            },
+            {
+                id: 'dummy-7',
+                title: 'Jejak Langkah Sang Pujangga',
+                author: 'Pramudya Wardhana',
+                category_name: 'Sastra Nusantara',
+                target_audience: 'dewasa',
+                cover_url: DUMMY_COVERS[4],
+                total_pages: 48,
+                rating: 4.7,
+                url: './detail-buku.html'
+            },
+            {
+                id: 'dummy-8',
+                title: 'Fajar Harapan di Desa Harapan',
+                author: 'Hendra Kusuma',
+                category_name: 'Inspirasi & Budaya',
+                target_audience: 'dewasa',
+                cover_url: DUMMY_COVERS[3],
+                total_pages: 42,
+                rating: 4.8,
+                url: './detail-buku.html'
+            }
+        ];
+
+        let currentAudience = 'semua';
+        let currentCategory = 'semua';
+        let searchQuery = '';
+
+        function getAudienceBadge(audience) {
+            if (audience === 'anak') {
+                return `<span class="inline-flex items-center gap-1 text-[10px] font-extrabold px-2 py-0.5 rounded-md bg-amber-100 text-amber-950 border border-amber-300 shadow-2xs"><span>🧸</span> Level 1 • Anak</span>`;
+            } else if (audience === 'remaja') {
+                return `<span class="inline-flex items-center gap-1 text-[10px] font-extrabold px-2 py-0.5 rounded-md bg-indigo-100 text-indigo-950 border border-indigo-300 shadow-2xs"><span>🚀</span> Level 2 • Remaja</span>`;
+            } else {
+                return `<span class="inline-flex items-center gap-1 text-[10px] font-extrabold px-2 py-0.5 rounded-md bg-teal-100 text-teal-950 border border-teal-300 shadow-2xs"><span>📖</span> Level 3 • Dewasa</span>`;
+            }
+        }
+
+        function createBookCard(b, idx) {
+            const cover = b.cover_url || DUMMY_COVERS[idx % DUMMY_COVERS.length];
+            const audienceBadge = getAudienceBadge(b.target_audience);
+            const rating = Number(b.rating || 4.9).toFixed(1);
+            const detailUrl = b.url || './detail-buku.html';
+
+            return `
+                <div class="group rounded-2xl sm:rounded-3xl bg-[#FFFCF7] border border-orange-200/70 hover:border-indigo-400 hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between overflow-hidden">
+                    <div class="relative w-full aspect-[3/4] bg-stone-100 overflow-hidden">
+                        <img src="${cover}" alt="${b.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+                        <div class="absolute inset-y-0 left-0 w-2.5 bg-gradient-to-r from-black/25 to-transparent pointer-events-none"></div>
+                        <div class="absolute top-2.5 left-2.5 z-10">${audienceBadge}</div>
+                        <div class="absolute top-2.5 right-2.5 px-2 py-0.5 rounded-md bg-white/95 text-[10px] font-extrabold text-slate-800 shadow-xs border border-stone-200 flex items-center gap-1">
+                            <svg class="w-3 h-3 text-amber-500 fill-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <span>${rating}</span>
+                        </div>
+                    </div>
+                    <div class="p-3 sm:p-4 flex-1 flex flex-col justify-between">
+                        <div>
+                            <div class="text-[10px] font-bold text-amber-700 uppercase tracking-wide mb-1 truncate">${b.category_name || 'Cerita Bergambar'}</div>
+                            <h3 class="font-display font-extrabold text-slate-900 text-xs sm:text-sm leading-snug line-clamp-2 mb-1 group-hover:text-indigo-600 transition-colors">${b.title}</h3>
+                            <p class="text-[11px] text-slate-500 mb-3 truncate">Oleh ${b.author}</p>
+                        </div>
+                        <div class="pt-2.5 border-t border-orange-100/70 flex items-center justify-between text-[11px] text-slate-500 font-medium">
+                            <span class="flex items-center gap-1">
+                                <svg class="w-3.5 h-3.5 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                                <span>${b.total_pages || 16} Hlm</span>
+                            </span>
+                            <a href="${detailUrl}" class="cursor-pointer inline-flex items-center gap-1 font-bold text-indigo-600 hover:text-indigo-800 hover:underline px-2 py-1 rounded-md hover:bg-indigo-50 group-hover:translate-x-0.5 transition-all">
+                                <span>Detail Buku</span>
+                                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderKoleksi() {
+            const grid = document.getElementById('koleksi-grid');
+            const emptyState = document.getElementById('empty-state');
+            const countSpan = document.getElementById('visible-count');
+            const filterIndicator = document.getElementById('active-filter-indicator');
+            const filterDesc = document.getElementById('filter-description');
+
+            let filtered = [...ALL_BOOKS];
+
+            if (currentAudience !== 'semua') {
+                filtered = filtered.filter(b => b.target_audience === currentAudience);
+            }
+            if (currentCategory !== 'semua') {
+                filtered = filtered.filter(b => {
+                    const cat = (b.category_name || '').toLowerCase();
+                    return cat.includes(currentCategory.toLowerCase()) || currentCategory.toLowerCase().includes(cat);
+                });
+            }
+            if (searchQuery) {
+                filtered = filtered.filter(b =>
+                    b.title.toLowerCase().includes(searchQuery) ||
+                    b.author.toLowerCase().includes(searchQuery) ||
+                    (b.category_name && b.category_name.toLowerCase().includes(searchQuery))
+                );
+            }
+
+            if (countSpan) countSpan.textContent = filtered.length;
+
+            const isFiltered = currentAudience !== 'semua' || currentCategory !== 'semua' || searchQuery !== '';
+            if (filterIndicator) {
+                if (isFiltered) {
+                    filterIndicator.classList.remove('hidden');
+                    filterIndicator.classList.add('flex');
+                    let descParts = [];
+                    if (currentAudience !== 'semua') descParts.push(`Jenjang: ${currentAudience}`);
+                    if (currentCategory !== 'semua') descParts.push(`Kategori: ${currentCategory}`);
+                    if (searchQuery) descParts.push(`Cari: "${searchQuery}"`);
+                    if (filterDesc) filterDesc.textContent = descParts.join(' • ');
+                } else {
+                    filterIndicator.classList.add('hidden');
+                    filterIndicator.classList.remove('flex');
+                }
+            }
+
+            if (filtered.length === 0) {
+                grid.innerHTML = '';
+                if (emptyState) emptyState.classList.remove('hidden');
+                return;
+            }
+
+            if (emptyState) emptyState.classList.add('hidden');
+
+            let html = '';
+            filtered.forEach((b, i) => {
+                html += createBookCard(b, i);
+            });
+            grid.innerHTML = html;
+        }
+
+        function setLevelFilter(audience, btn) {
+            currentAudience = audience;
+            document.querySelectorAll('#level-selector-tabs .filter-level-btn').forEach(b => {
+                b.className = 'filter-level-btn p-3 rounded-2xl border text-left transition-all duration-200 bg-[#FFFCF7] border-orange-200/80 text-slate-800 flex flex-col justify-between';
+            });
+
+            if (btn) {
+                btn.className = 'filter-level-btn active p-3 rounded-2xl border-2 text-left transition-all duration-200 bg-indigo-600 border-indigo-600 text-white shadow-md flex flex-col justify-between';
+            }
+            renderKoleksi();
+        }
+
+        function filterCategory(cat) {
+            currentCategory = cat;
+            document.querySelectorAll('#category-pills .cat-pill').forEach(p => {
+                p.className = 'cat-pill flex-shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold transition-all bg-white text-slate-600 hover:bg-orange-50 border border-orange-200/60 shadow-2xs hover:border-amber-400';
+            });
+            const activePill = document.querySelector(`#category-pills .cat-pill[data-cat="${cat}"]`);
+            if (activePill) {
+                activePill.className = 'cat-pill active flex-shrink-0 inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold transition-all bg-indigo-600 text-white shadow-2xs border border-indigo-600';
+            }
+            renderKoleksi();
+        }
+
+        const searchInput = document.getElementById('search-koleksi');
+        const searchClearBtn = document.getElementById('search-clear-btn');
+
+        searchInput?.addEventListener('input', function(e) {
+            searchQuery = e.target.value.trim().toLowerCase();
+            if (searchClearBtn) searchClearBtn.classList.toggle('hidden', searchQuery === '');
+            renderKoleksi();
+        });
+
+        function clearSearch() {
+            if (searchInput) searchInput.value = '';
+            if (searchClearBtn) searchClearBtn.classList.add('hidden');
+            searchQuery = '';
+            renderKoleksi();
+        }
+
+        function resetAllFilters() {
+            currentAudience = 'semua';
+            currentCategory = 'semua';
+            searchQuery = '';
+            if (searchInput) searchInput.value = '';
+            if (searchClearBtn) searchClearBtn.classList.add('hidden');
+            const allBtn = document.querySelector('#level-selector-tabs .filter-level-btn[data-audience="semua"]');
+            if (allBtn) setLevelFilter('semua', allBtn);
+            filterCategory('semua');
+        }
+
+        function toggleMobile() {
+            const menu = document.getElementById('mobile-menu');
+            if (menu) menu.classList.toggle('hidden');
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            renderKoleksi();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ceria di Kampung Kami: Permainan Tradisional — Buku Flip Edukasi Interaktif</title>
+
+    <!-- Google Fonts: Nunito & Quicksand -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Quicksand:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS (CDN Standalone) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Nunito', 'Quicksand', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #0a0e27;
+            color: #f1f5f9;
+            overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            user-select: none;
+        }
+
+        .cosmic-bg {
+            background: radial-gradient(circle at 50% 30%, #1e264f 0%, #0d122e 50%, #060918 100%);
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0.6;
+            animation: twinkle var(--duration, 3s) infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; transform: scale(0.8); }
+            50% { opacity: 0.9; transform: scale(1.2); }
+        }
+
+        .stage-container {
+            perspective: 2400px;
+            transform-style: preserve-3d;
+        }
+
+        .book-spread {
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .book-page-white {
+            background-color: #ffffff !important;
+            color: #0f172a;
+            box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(0, 0, 0, 0.06);
+            overflow: hidden;
+            backface-visibility: hidden;
+        }
+
+        .spine-shadow-left {
+            background: linear-gradient(to right, transparent 75%, rgba(0, 0, 0, 0.05) 90%, rgba(0, 0, 0, 0.22) 100%);
+        }
+        .spine-shadow-right {
+            background: linear-gradient(to left, transparent 75%, rgba(0, 0, 0, 0.05) 90%, rgba(0, 0, 0, 0.22) 100%);
+        }
+
+        .custom-scroll::-webkit-scrollbar {
+            width: 5px;
+        }
+        .custom-scroll::-webkit-scrollbar-thumb {
+            background: rgba(148, 163, 184, 0.4);
+            border-radius: 999px;
+        }
+    </style>
+</head>
+<body class="cosmic-bg text-slate-100 flex flex-col justify-between h-screen w-screen relative">
+
+    <div id="stars-field" class="absolute inset-0 pointer-events-none z-0 overflow-hidden"></div>
+
+    <!-- TOP BAR -->
+    <header class="relative z-30 flex items-center justify-between px-4 sm:px-6 py-2.5 sm:py-3 border-b border-white/10 bg-slate-950/40 backdrop-blur-md">
+        <div class="flex items-center gap-3">
+            <a href="./index.html" class="h-9 px-2.5 rounded-xl bg-white border border-white/20 shadow-md flex items-center justify-center transition-transform hover:scale-105 shrink-0" title="Beranda CintaBaca">
+                <img src="./images/Transparent.png" alt="CintaBaca" class="h-6 w-auto object-contain">
+            </a>
+            <div>
+                <h1 class="text-sm sm:text-base font-extrabold text-white tracking-wide flex items-center gap-2">
+                    CintaBaca <span class="text-[11px] font-semibold text-indigo-200 bg-white/10 px-2 py-0.5 rounded-md border border-white/15">Buku Edukasi</span>
+                </h1>
+                <p class="text-[11px] sm:text-xs text-indigo-200/80 font-medium truncate max-w-[200px] sm:max-w-sm md:max-w-md">
+                    Materi Pembelajaran: <span class="text-amber-300 font-semibold">Ceria di Kampung Kami: Permainan Tradisional</span>
+                </p>
+            </div>
+        </div>
+
+        <div class="flex items-center gap-2 sm:gap-3">
+            <span class="hidden md:inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-amber-400/10 text-amber-300 border border-amber-400/30">
+                <span>⭐</span> Edisi Anak &amp; Orang Tua
+            </span>
+
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-indigo-500/20 text-indigo-200 border border-indigo-400/30">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span>Mode 2 Halaman</span>
+            </span>
+
+            <a 
+                href="./detail-buku.html" 
+                class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold text-white/90 hover:text-white bg-white/10 hover:bg-white/20 border border-white/15 transition-all"
+                title="Tutup Pembaca & Kembali ke Detail Buku"
+            >
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                <span class="hidden sm:inline">Keluar</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- MAIN BOOK STAGE -->
+    <main class="relative z-10 flex-1 flex items-center justify-center p-2 sm:p-5 overflow-hidden">
+        <button 
+            id="btn-floating-prev"
+            onclick="flipPrev()"
+            class="absolute left-2 sm:left-6 lg:left-10 z-20 w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-slate-900/70 hover:bg-indigo-600 active:scale-95 text-white flex items-center justify-center shadow-2xl border border-white/20 backdrop-blur-md transition-all hover:scale-105 cursor-pointer disabled:opacity-30 disabled:pointer-events-none"
+            title="Halaman Sebelumnya (Panah Kiri)"
+        >
+            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        </button>
+
+        <div class="stage-container flex items-center justify-center w-full max-w-5xl h-[74vh] sm:h-[77vh] max-h-[720px]">
+            <div id="flipbook-root" class="book-spread relative flex items-center justify-center transition-all duration-300">
+                <!-- Konten 2 Halaman Putih Dinamis -->
+            </div>
+        </div>
+
+        <button 
+            id="btn-floating-next"
+            onclick="flipNext()"
+            class="absolute right-2 sm:right-6 lg:right-10 z-20 w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-slate-900/70 hover:bg-indigo-600 active:scale-95 text-white flex items-center justify-center shadow-2xl border border-white/20 backdrop-blur-md transition-all hover:scale-105 cursor-pointer disabled:opacity-30 disabled:pointer-events-none"
+            title="Halaman Berikutnya (Panah Kanan)"
+        >
+            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </button>
+    </main>
+
+    <!-- BOTTOM CONTROL BAR -->
+    <footer class="relative z-30 pb-3 pt-1 px-4 flex justify-center items-center">
+        <div class="inline-flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2 rounded-full bg-slate-900/80 border border-white/15 backdrop-blur-xl shadow-2xl text-xs sm:text-sm font-bold text-white">
+            
+            <button 
+                id="btn-bar-prev"
+                onclick="flipPrev()" 
+                class="px-2.5 sm:px-3 py-1 rounded-full hover:bg-white/15 active:bg-white/25 flex items-center gap-1 transition-colors cursor-pointer disabled:opacity-40 disabled:pointer-events-none"
+            >
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><polygon points="19 20 9 12 19 4 19 20"/></svg>
+                <span>Sebelumnya</span>
+            </button>
+
+            <div id="page-status-badge" class="px-3.5 py-1 rounded-full bg-indigo-600/60 text-amber-300 font-extrabold border border-indigo-400/40 text-xs sm:text-sm min-w-[140px] text-center shadow-inner">
+                Sampul Depan
+            </div>
+
+            <button 
+                id="btn-bar-next"
+                onclick="flipNext()" 
+                class="px-2.5 sm:px-3 py-1 rounded-full hover:bg-white/15 active:bg-white/25 flex items-center gap-1 transition-colors cursor-pointer disabled:opacity-40 disabled:pointer-events-none"
+            >
+                <span>Berikutnya</span>
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 4 15 12 5 20 5 4"/></svg>
+            </button>
+
+            <span class="w-px h-4 bg-white/20 mx-1 hidden sm:inline-block"></span>
+
+            <button 
+                id="btn-autoplay"
+                onclick="toggleAutoPlay()" 
+                class="px-2.5 sm:px-3 py-1 rounded-full hover:bg-white/15 active:bg-white/25 flex items-center gap-1.5 transition-colors cursor-pointer text-slate-200"
+                title="Putar Otomatis Cerita (Auto Flip)"
+            >
+                <span id="icon-autoplay">▶</span>
+                <span id="text-autoplay" class="hidden sm:inline">Otomatis</span>
+            </button>
+
+            <button 
+                id="btn-sound"
+                onclick="toggleSound()" 
+                class="px-2.5 sm:px-3 py-1 rounded-full hover:bg-white/15 active:bg-white/25 flex items-center gap-1.5 transition-colors cursor-pointer text-slate-200"
+                title="Efek Suara Kertas Buku"
+            >
+                <span id="icon-sound">🔊</span>
+                <span id="text-sound" class="hidden sm:inline">Suara</span>
+            </button>
+
+            <button 
+                onclick="openTocModal()" 
+                class="px-2.5 sm:px-3 py-1 rounded-full hover:bg-white/15 active:bg-white/25 flex items-center gap-1.5 transition-colors cursor-pointer text-slate-200"
+            >
+                <span>📑</span>
+                <span class="hidden sm:inline">Daftar Cerita</span>
+            </button>
+
+            <button 
+                onclick="toggleFullscreen()" 
+                class="px-2.5 sm:px-3 py-1 rounded-full hover:bg-white/15 active:bg-white/25 flex items-center gap-1.5 transition-colors cursor-pointer text-slate-200"
+                title="Mode Layar Penuh"
+            >
+                <span>⛶</span>
+                <span class="hidden sm:inline">Layar Penuh</span>
+            </button>
+
+        </div>
+    </footer>
+
+    <!-- MODAL DAFTAR CERITA -->
+    <div id="toc-modal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-md hidden items-center justify-center p-4">
+        <div class="w-full max-w-2xl bg-slate-900 border border-white/20 rounded-3xl p-5 sm:p-6 shadow-2xl flex flex-col max-h-[85vh]">
+            <div class="flex items-center justify-between pb-4 border-b border-white/10 mb-4">
+                <div class="flex items-center gap-2">
+                    <span class="text-2xl">📖</span>
+                    <h2 class="text-lg font-extrabold text-white">Daftar Cerita &amp; Halaman (15 Halaman)</h2>
+                </div>
+                <button onclick="closeTocModal()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white font-bold">✕</button>
+            </div>
+            <div id="toc-list" class="flex-1 overflow-y-auto custom-scroll space-y-2 pr-1"></div>
+        </div>
+    </div>
+
+    <script>
+        const BOOK_PAGES = [
+            {
+                pageNumber: 1,
+                type: 'cover',
+                title: 'Ceria di Kampung Kami: Permainan Tradisional',
+                badge: 'SERI WARISAN BUDAYA CILIK',
+                coverImg: './images/dummy-books/cover-permainan-tradisional.jpg'
+            },
+            {
+                pageNumber: 2,
+                type: 'spread-left',
+                topic: 'PEMBUKA • KAMPUNG SUKAMAJU',
+                title: 'Pagi Ceria di Sukamaju',
+                vectorType: 'village'
+            },
+            {
+                pageNumber: 3,
+                type: 'spread-right',
+                topic: 'KISAH SAHABAT CILIK',
+                title: 'Hari Ini Tanpa Layar Gadget',
+                storyHtml: `
+                    <p class="text-slate-700 leading-relaxed text-xs sm:text-sm mb-3">
+                        Matahari pagi menyinari atap rumah panggung di Kampung Sukamaju. Udara terasa sejuk, burung pipit berkicau riang di ranting pohon kelapa.
+                    </p>
+                    <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 mb-3.5">
+                        <h4 class="font-bold text-xs text-indigo-900 mb-2 flex items-center gap-1.5">
+                            <span class="w-2 h-2 rounded-full bg-indigo-600"></span>
+                            Empat Sahabat Setia:
+                        </h4>
+                        <div class="grid grid-cols-2 gap-2 text-[11px] text-slate-600">
+                            <div class="p-2 rounded-xl bg-white border border-slate-200/80">
+                                <strong class="text-indigo-600 block">Rian</strong> Si Cerdik &amp; Pemikir
+                            </div>
+                            <div class="p-2 rounded-xl bg-white border border-slate-200/80">
+                                <strong class="text-amber-600 block">Siti</strong> Si Lincah &amp; Penuh Tawa
+                            </div>
+                            <div class="p-2 rounded-xl bg-white border border-slate-200/80">
+                                <strong class="text-emerald-600 block">Budi</strong> Si Tangguh &amp; Pemberani
+                            </div>
+                            <div class="p-2 rounded-xl bg-white border border-slate-200/80">
+                                <strong class="text-rose-600 block">Maya</strong> Si Teliti &amp; Kreatif
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-slate-700 text-xs leading-relaxed mb-3">
+                        "Teman-teman! Ayo simpan gawai di meja. Hari ini kita buktikan bahwa bermain bersama di luar ruangan jauh lebih seru!" seru Siti sambil membawa kapur warna-warni.
+                    </p>
+                    <div class="p-2.5 rounded-xl bg-indigo-50/70 border border-indigo-200 text-indigo-950 text-[11px] font-semibold">
+                        Pesan Hangat: Bermain bersama teman melatih tubuh sehat, kepekaan empati, dan keceriaan alami.
+                    </div>
+                `
+            },
+            {
+                pageNumber: 4,
+                type: 'spread-left',
+                topic: 'PERMAINAN 1 • ENGKLEK CERIA',
+                title: 'Arena Lompat Engklek',
+                vectorType: 'engklek'
+            },
+            {
+                pageNumber: 5,
+                type: 'spread-right',
+                topic: 'CARA BERMAIN & SAINS KAKI',
+                title: 'Lompat Satu Kaki Menuju Bintang',
+                storyHtml: `
+                    <p class="text-slate-700 leading-relaxed text-xs sm:text-sm mb-3">
+                        Siti menggambar 8 kotak bernomor di tanah lapang berpasir halus. Bentuknya gagah menyerupai sayap pesawat terbang yang siap meluncur.
+                    </p>
+                    <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 mb-3 space-y-2">
+                        <div class="font-bold text-xs text-amber-900 flex items-center gap-1.5">
+                            <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+                            3 Langkah Bermain Engklek:
+                        </div>
+                        <ul class="text-[11px] sm:text-xs text-slate-600 space-y-1.5 pl-4 list-decimal">
+                            <li><strong>Lempar Gaco:</strong> Lemparkan batu ceper ke kotak nomor 1 tanpa keluar garis.</li>
+                            <li><strong>Lompat Satu Kaki:</strong> Lewati kotak yang ada batunya dengan kaki terangkat satu.</li>
+                            <li><strong>Sayap Ganda:</strong> Pada kotak 4 &amp; 5, kedua kaki boleh mendarat bersamaan untuk beristirahat sejenak!</li>
+                        </ul>
+                    </div>
+                    <div class="p-3 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-950 text-[11px] leading-relaxed">
+                        <strong>Manfaat Kebugaran:</strong> Melatih kekuatan otot paha, memperkuat pergelangan kaki, dan mengasah estimasi jarak ruang (*spatial balance*) anak.
+                    </div>
+                `
+            },
+            {
+                pageNumber: 6,
+                type: 'spread-left',
+                topic: 'PERMAINAN 2 • EGRANG BAMBU',
+                title: 'Berdiri Gagah di Ketinggian',
+                vectorType: 'egrang'
+            },
+            {
+                pageNumber: 7,
+                type: 'spread-right',
+                topic: 'KETANGKASAN & KEBERANIAN',
+                title: 'Setinggi Dahan Pohon Jambu',
+                storyHtml: `
+                    <p class="text-slate-700 leading-relaxed text-xs sm:text-sm mb-3">
+                        Budi mengeluarkan dua bilah bambu wulung panjang dengan pijakan kayu kokoh setinggi satu meter dari tanah.
+                    </p>
+                    <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 mb-3">
+                        <p class="text-xs text-slate-700 leading-relaxed mb-2">
+                            Dengan tenang, Budi memegang kedua tiang bambu sejajar dada. Dalam satu kayuhan mantap, ia melangkah naik!
+                        </p>
+                        <p class="text-xs font-bold text-emerald-800 italic">
+                            "Wah, sekarang aku bisa melihat seluruh perkampungan dan memetik buah jambu air tanpa tangga!" seru Budi riang.
+                        </p>
+                    </div>
+                    <div class="space-y-2 text-[11px] text-slate-600 mb-3">
+                        <div class="flex items-center gap-2 p-2 rounded-xl bg-white border border-slate-200">
+                            <span class="font-bold text-indigo-600">Pusat Massa:</span> Gerakan tangan dan kaki harus seirama agar titik berat tubuh tidak condong ke belakang.
+                        </div>
+                        <div class="flex items-center gap-2 p-2 rounded-xl bg-white border border-slate-200">
+                            <span class="font-bold text-emerald-600">Nama Daerah:</span> Dikenal sebagai <em>Tengkak-tengkak</em> di Minangkabau dan <em>Batungkau</em> di Kalimantan Selatan.
+                        </div>
+                    </div>
+                    <div class="p-2.5 rounded-xl bg-amber-50 border border-amber-200 text-amber-950 text-[11px] font-semibold">
+                        Pelajaran Karakter: Mengalahkan rasa takut jatuh dan melatih rasa percaya diri tinggi.
+                    </div>
+                `
+            },
+            {
+                pageNumber: 8,
+                type: 'spread-left',
+                topic: 'PERMAINAN 3 • GASING KAYU',
+                title: 'Pusaran Warna & Dengungan Merdu',
+                vectorType: 'gasing'
+            },
+            {
+                pageNumber: 9,
+                type: 'spread-right',
+                topic: 'SAINS CILIK & KETELITIAN',
+                title: 'Sentakan Tali yang Sempurna',
+                storyHtml: `
+                    <p class="text-slate-700 leading-relaxed text-xs sm:text-sm mb-3">
+                        Rian memegang gasing kayu jati yang telah diukir halus. Maya membantu melilitkan tali katun putih dari pucuk poros hingga leher gasing dengan sangat rapi.
+                    </p>
+                    <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 mb-3">
+                        <p class="text-xs text-slate-700 leading-relaxed mb-2">
+                            Rian mengarahkan tangan ke depan, lalu menyentak tali dengan cepat... <em>Wuuusshhh!</em>
+                        </p>
+                        <p class="text-xs font-bold text-indigo-700">
+                            Gasing berputar sangat kencang di atas lempengan batu datar. Suara dengungannya terdengar seperti lebah yang sedang menyanyi!
+                        </p>
+                    </div>
+                    <div class="space-y-2 text-[11px] text-slate-600 mb-3">
+                        <div class="p-2 rounded-xl bg-white border border-slate-200">
+                            <strong class="text-slate-900 block font-bold">Gaya Sentrifugal:</strong>
+                            Putaran kencang menciptakan gaya ke arah luar yang menahan poros gasing agar tidak tumbang melawan tarikan gravitasi.
+                        </div>
+                        <div class="p-2 rounded-xl bg-white border border-slate-200">
+                            <strong class="text-slate-900 block font-bold">Ilusi Warna:</strong>
+                            Garis-garis warna merah dan biru pada badan gasing berpadu menjadi warna ungu keemasan saat berputar.
+                        </div>
+                    </div>
+                    <div class="p-2.5 rounded-xl bg-violet-50 border border-violet-200 text-violet-950 text-[11px] font-semibold">
+                        Nilai Luhur: Mengajarkan ketelitian tangan dan kesabaran saat menyiapkan lilitan tali.
+                    </div>
+                `
+            },
+            {
+                pageNumber: 10,
+                type: 'spread-left',
+                topic: 'PERMAINAN 4 • CONGKLAK DAKON',
+                title: 'Dentingan Kerang di Papan Naga',
+                vectorType: 'congklak'
+            },
+            {
+                pageNumber: 11,
+                type: 'spread-right',
+                topic: 'ASAH OTAK & KEJUJURAN',
+                title: 'Strategi Lumbung Padi Penuh',
+                storyHtml: `
+                    <p class="text-slate-700 leading-relaxed text-xs sm:text-sm mb-3">
+                        Saat sinar matahari siang menghangat, Siti dan Maya duduk bersila di teras rumah bambu yang teduh. Di antara mereka terbentang papan congklak kayu jati berbentuk ukiran kepala naga.
+                    </p>
+                    <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 mb-3">
+                        <p class="text-xs text-slate-700 leading-relaxed mb-2">
+                            Jari-jemari lincah mereka membagikan biji kerang sawo putih satu per satu ke dalam lubang-lubang kecil searah jarum jam.
+                        </p>
+                        <p class="text-xs font-bold text-rose-700">
+                            <em>Klitik... klitik...</em> Bunyi dentingan kerang berpadu indah dengan hembusan angin sejuk perbukitan.
+                        </p>
+                    </div>
+                    <div class="space-y-2 text-[11px] text-slate-600 mb-3">
+                        <div class="p-2 rounded-xl bg-white border border-slate-200">
+                            <strong class="text-slate-900 block font-bold">Matematika Cepat:</strong>
+                            Menghitung sisa biji agar giliran tidak mati di lubang kosong pihak lawan.
+                        </div>
+                        <div class="p-2 rounded-xl bg-white border border-slate-200">
+                            <strong class="text-slate-900 block font-bold">Amanah &amp; Jujur:</strong>
+                            Menjatuhkan tepat satu biji di tiap lubang tanpa boleh berbuat curang.
+                        </div>
+                    </div>
+                    <div class="p-2.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-950 text-[11px] font-semibold">
+                        Warisan Luhur: Permainan ketenangan pikiran yang dimainkan sejak masa kerajaan kuno Nusantara.
+                    </div>
+                `
+            },
+            {
+                pageNumber: 12,
+                type: 'spread-left',
+                topic: 'PERMAINAN 5 • LAYANG-LAYANG & GOBAK SODOR',
+                title: 'Menari di Langit Lembayung',
+                vectorType: 'kites'
+            },
+            {
+                pageNumber: 13,
+                type: 'spread-right',
+                topic: 'KEKOMPAKAN TIM & SOLIDARITAS',
+                title: 'Benteng Sahabat Nusantara',
+                storyHtml: `
+                    <p class="text-slate-700 leading-relaxed text-xs sm:text-sm mb-3">
+                        Sore menjelang, semilir angin barat berhembus kencang di pematang sawah. Layang-layang garuda gagah milik Budi dan layang-layang kupu-kupu pita merah milik Siti terbang membubung tinggi ke langit senja.
+                    </p>
+                    <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 mb-3">
+                        <p class="text-xs text-slate-700 leading-relaxed mb-2">
+                            Setelah layang-layang ditambatkan aman, mereka bermain Gobak Sodor (Hadang). Tim penjaga merentangkan tangan menjaga garis benteng pertahanan.
+                        </p>
+                        <p class="text-xs font-bold text-sky-800">
+                            Rian berlari lincah mengecoh penjaga garis, disambut sorak gembira Maya dan kawan-kawan!
+                        </p>
+                    </div>
+                    <div class="space-y-2 text-[11px] text-slate-600 mb-3">
+                        <div class="p-2 rounded-xl bg-white border border-slate-200">
+                            <strong class="text-slate-900 block font-bold">Kekompakan Tim:</strong>
+                            Tidak ada yang menang sendiri, semua bahu-membahu melindungi garis pertahanan.
+                        </div>
+                        <div class="p-2 rounded-xl bg-white border border-slate-200">
+                            <strong class="text-slate-900 block font-bold">Tubuh Bugar &amp; Sehat:</strong>
+                            Keringat sehat mengalir, udara segar sawah membersihkan paru-paru anak.
+                        </div>
+                    </div>
+                    <div class="p-2.5 rounded-xl bg-sky-50 border border-sky-200 text-sky-950 text-[11px] font-semibold text-center">
+                        "Sahabat sejati adalah mereka yang tertawa dan berjuang bersama di bawah langit biru!"
+                    </div>
+                `
+            },
+            {
+                pageNumber: 14,
+                type: 'spread-left',
+                topic: 'ASAH INGATAN • KUIS CILIK',
+                title: 'Uji Kecerdasan Sahabat Budaya',
+                vectorType: 'quiz'
+            },
+            {
+                pageNumber: 15,
+                type: 'backcover',
+                topic: 'SAMPUL PENUTUP',
+                title: 'Ceria di Kampung Kami: Permainan Tradisional'
+            }
+        ];
+
+        const SPREADS = [
+            { left: null, right: 1 },
+            { left: 2, right: 3 },
+            { left: 4, right: 5 },
+            { left: 6, right: 7 },
+            { left: 8, right: 9 },
+            { left: 10, right: 11 },
+            { left: 12, right: 13 },
+            { left: 14, right: 15 }
+        ];
+
+        let currentSpreadIndex = 0;
+        let isSoundEnabled = true;
+        let isAutoPlaying = false;
+        let autoPlayTimer = null;
+
+        let audioCtx = null;
+        function playPageFlipSound() {
+            if (!isSoundEnabled) return;
+            try {
+                if (!audioCtx) {
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                if (audioCtx.state === 'suspended') {
+                    audioCtx.resume();
+                }
+
+                const bufferSize = audioCtx.sampleRate * 0.14;
+                const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+                const data = buffer.getChannelData(0);
+
+                for (let i = 0; i < bufferSize; i++) {
+                    const decay = Math.exp(-i / (audioCtx.sampleRate * 0.04));
+                    data[i] = (Math.random() * 2 - 1) * decay;
+                }
+
+                const noise = audioCtx.createBufferSource();
+                noise.buffer = buffer;
+
+                const filter = audioCtx.createBiquadFilter();
+                filter.type = 'bandpass';
+                filter.frequency.setValueAtTime(1200, audioCtx.currentTime);
+                filter.frequency.exponentialRampToValueAtTime(350, audioCtx.currentTime + 0.13);
+                filter.Q.value = 1.1;
+
+                const gainNode = audioCtx.createGain();
+                gainNode.gain.setValueAtTime(0.3, audioCtx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.13);
+
+                noise.connect(filter);
+                filter.connect(gainNode);
+                gainNode.connect(audioCtx.destination);
+
+                noise.start();
+            } catch (e) {}
+        }
+
+        function getVectorIllustration(type) {
+            if (type === 'village') {
+                return `
+                    <div class="w-full h-full flex flex-col justify-between">
+                        <div class="relative w-full aspect-[4/3] rounded-2xl overflow-hidden border border-slate-200 shadow-sm bg-gradient-to-b from-sky-100 via-sky-50 to-emerald-100 flex items-center justify-center">
+                            <svg viewBox="0 0 400 300" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="340" cy="60" r="34" fill="#FBBF24" />
+                                <circle cx="340" cy="60" r="44" fill="#FDE68A" opacity="0.4" />
+                                <path d="M40 70 Q55 50 75 60 Q95 45 115 65 Q135 60 140 75 Q145 90 120 90 L50 90 Q35 90 40 70 Z" fill="#FFFFFF" opacity="0.9"/>
+                                <path d="M220 50 Q235 35 250 45 Q270 30 285 50 Q300 45 305 60 L220 60 Z" fill="#FFFFFF" opacity="0.8"/>
+                                <path d="M-20 220 Q80 130 200 170 Q320 120 420 190 L420 300 L-20 300 Z" fill="#34D399" opacity="0.6"/>
+                                <path d="M-20 200 Q100 160 220 200 Q340 160 420 220 L420 300 L-20 300 Z" fill="#10B981" opacity="0.8"/>
+                                <path d="M-20 230 Q120 210 240 230 Q360 200 420 240 L420 300 L-20 300 Z" fill="#059669"/>
+                                <rect x="50" y="170" width="90" height="55" rx="4" fill="#B45309"/>
+                                <polygon points="40,170 95,120 150,170" fill="#78350F"/>
+                                <rect x="80" y="190" width="22" height="35" rx="3" fill="#FEF3C7"/>
+                                <rect x="58" y="180" width="16" height="16" rx="2" fill="#FEF3C7"/>
+                                <rect x="115" y="180" width="16" height="16" rx="2" fill="#FEF3C7"/>
+                                <line x1="55" y1="225" x2="55" y2="245" stroke="#78350F" stroke-width="4"/>
+                                <line x1="135" y1="225" x2="135" y2="245" stroke="#78350F" stroke-width="4"/>
+                                <path d="M330 260 Q340 180 325 130" stroke="#92400E" stroke-width="8" stroke-linecap="round" fill="none"/>
+                                <path d="M325 130 Q280 110 260 130" stroke="#047857" stroke-width="6" stroke-linecap="round" fill="none"/>
+                                <path d="M325 130 Q370 100 390 125" stroke="#047857" stroke-width="6" stroke-linecap="round" fill="none"/>
+                                <path d="M325 130 Q330 80 350 75" stroke="#047857" stroke-width="6" stroke-linecap="round" fill="none"/>
+                                <circle cx="170" cy="225" r="10" fill="#FCD34D"/>
+                                <rect x="162" y="235" width="16" height="22" rx="4" fill="#3B82F6"/>
+                                <line x1="160" y1="238" x2="152" y2="225" stroke="#FCD34D" stroke-width="3" stroke-linecap="round"/>
+                                <line x1="166" y1="257" x2="166" y2="272" stroke="#1E3A8A" stroke-width="3.5"/>
+                                <line x1="174" y1="257" x2="174" y2="272" stroke="#1E3A8A" stroke-width="3.5"/>
+                                <circle cx="205" cy="223" r="10" fill="#FCD34D"/>
+                                <path d="M197 233 L213 233 L218 256 L192 256 Z" fill="#EF4444"/>
+                                <line x1="213" y1="237" x2="224" y2="222" stroke="#FCD34D" stroke-width="3" stroke-linecap="round"/>
+                                <line x1="200" y1="256" x2="200" y2="272" stroke="#B91C1C" stroke-width="3.5"/>
+                                <line x1="209" y1="256" x2="209" y2="272" stroke="#B91C1C" stroke-width="3.5"/>
+                                <circle cx="240" cy="225" r="10" fill="#FCD34D"/>
+                                <rect x="232" y="235" width="16" height="22" rx="4" fill="#10B981"/>
+                                <line x1="236" y1="257" x2="236" y2="272" stroke="#065F46" stroke-width="3.5"/>
+                                <line x1="244" y1="257" x2="244" y2="272" stroke="#065F46" stroke-width="3.5"/>
+                                <circle cx="272" cy="226" r="10" fill="#FCD34D"/>
+                                <path d="M264 236 L280 236 L284 256 L260 256 Z" fill="#F59E0B"/>
+                                <line x1="267" y1="256" x2="267" y2="272" stroke="#92400E" stroke-width="3.5"/>
+                                <line x1="275" y1="256" x2="275" y2="272" stroke="#92400E" stroke-width="3.5"/>
+                            </svg>
+                        </div>
+                        <div class="mt-3 p-3 rounded-2xl bg-slate-50 border border-slate-200 text-center">
+                            <span class="text-xs font-bold text-slate-800 block">Pemandangan Kampung Sukamaju</span>
+                            <span class="text-[11px] text-slate-500">Tempat bermain anak yang hijau, sejuk, dan penuh kehangatan kearifan lokal.</span>
+                        </div>
+                    </div>
+                `;
+            }
+
+            if (type === 'engklek') {
+                return `
+                    <div class="w-full h-full flex flex-col justify-between">
+                        <div class="relative w-full aspect-[4/3] rounded-2xl overflow-hidden border border-slate-200 shadow-sm bg-gradient-to-b from-amber-50 to-emerald-50 flex items-center justify-center p-2">
+                            <svg viewBox="0 0 320 280" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="0" y="0" width="320" height="280" fill="#F0FDF4"/>
+                                <path d="M0 240 Q160 220 320 240 L320 280 L0 280 Z" fill="#DCFCE7"/>
+                                <rect x="135" y="215" width="50" height="40" rx="3" fill="#FEF3C7" stroke="#D97706" stroke-width="2.5"/>
+                                <text x="160" y="240" font-family="Nunito" font-size="18" font-weight="bold" fill="#B45309" text-anchor="middle">1</text>
+                                <rect x="135" y="172" width="50" height="40" rx="3" fill="#FEF3C7" stroke="#D97706" stroke-width="2.5"/>
+                                <text x="160" y="197" font-family="Nunito" font-size="18" font-weight="bold" fill="#B45309" text-anchor="middle">2</text>
+                                <rect x="135" y="129" width="50" height="40" rx="3" fill="#FEF3C7" stroke="#D97706" stroke-width="2.5"/>
+                                <text x="160" y="154" font-family="Nunito" font-size="18" font-weight="bold" fill="#B45309" text-anchor="middle">3</text>
+                                <rect x="82" y="86" width="50" height="40" rx="3" fill="#E0E7FF" stroke="#4F46E5" stroke-width="2.5"/>
+                                <text x="107" y="111" font-family="Nunito" font-size="18" font-weight="bold" fill="#3730A3" text-anchor="middle">4</text>
+                                <rect x="135" y="86" width="50" height="40" rx="3" fill="#FEF3C7" stroke="#D97706" stroke-width="2.5"/>
+                                <text x="160" y="111" font-family="Nunito" font-size="18" font-weight="bold" fill="#B45309" text-anchor="middle">5</text>
+                                <rect x="188" y="86" width="50" height="40" rx="3" fill="#E0E7FF" stroke="#4F46E5" stroke-width="2.5"/>
+                                <text x="213" y="111" font-family="Nunito" font-size="18" font-weight="bold" fill="#3730A3" text-anchor="middle">6</text>
+                                <rect x="135" y="43" width="50" height="40" rx="3" fill="#FEF3C7" stroke="#D97706" stroke-width="2.5"/>
+                                <text x="160" y="68" font-family="Nunito" font-size="18" font-weight="bold" fill="#B45309" text-anchor="middle">7</text>
+                                <path d="M120 43 A40 40 0 0 1 200 43 Z" fill="#FEE2E2" stroke="#DC2626" stroke-width="2.5"/>
+                                <text x="160" y="32" font-family="Nunito" font-size="16" font-weight="bold" fill="#991B1B" text-anchor="middle">8</text>
+                                <ellipse cx="148" cy="228" rx="8" ry="5" fill="#64748B" stroke="#334155" stroke-width="1.5"/>
+                                <circle cx="265" cy="150" r="13" fill="#FCD34D"/>
+                                <path d="M255 163 L275 163 L280 190 L250 190 Z" fill="#EF4444"/>
+                                <line x1="250" y1="170" x2="235" y2="160" stroke="#FCD34D" stroke-width="4" stroke-linecap="round"/>
+                                <line x1="275" y1="170" x2="295" y2="165" stroke="#FCD34D" stroke-width="4" stroke-linecap="round"/>
+                                <line x1="260" y1="190" x2="260" y2="215" stroke="#991B1B" stroke-width="4" stroke-linecap="round"/>
+                                <line x1="270" y1="190" x2="285" y2="198" stroke="#991B1B" stroke-width="4" stroke-linecap="round"/>
+                                <line x1="285" y1="198" x2="280" y2="210" stroke="#991B1B" stroke-width="4" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <div class="mt-3 p-3 rounded-2xl bg-slate-50 border border-slate-200 text-center">
+                            <span class="text-xs font-bold text-slate-800 block">Pola Lapangan Engklek Nusantara</span>
+                            <span class="text-[11px] text-slate-500">Anak melompat satu kaki melewati kotak dengan seimbang dan gembira.</span>
+                        </div>
+                    </div>
+                `;
+            }
+
+            if (type === 'egrang') {
+                return `
+                    <div class="w-full h-full flex flex-col justify-between">
+                        <div class="relative w-full aspect-[4/3] rounded-2xl overflow-hidden border border-slate-200 shadow-sm bg-gradient-to-b from-sky-50 via-emerald-50 to-lime-100 flex items-center justify-center p-2">
+                            <svg viewBox="0 0 320 280" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="50" cy="90" r="45" fill="#10B981" opacity="0.85"/>
+                                <circle cx="85" cy="70" r="38" fill="#059669"/>
+                                <circle cx="35" cy="65" r="30" fill="#047857"/>
+                                <circle cx="55" cy="85" r="5" fill="#EF4444"/>
+                                <circle cx="75" cy="95" r="5.5" fill="#EF4444"/>
+                                <circle cx="40" cy="105" r="4.5" fill="#EF4444"/>
+                                <rect x="52" y="120" width="16" height="150" rx="3" fill="#78350F"/>
+                                <rect x="0" y="245" width="320" height="35" fill="#84CC16"/>
+                                <ellipse cx="270" cy="235" rx="14" ry="11" fill="#EA580C"/>
+                                <circle cx="282" cy="225" r="7" fill="#EA580C"/>
+                                <polygon points="289,224 296,226 289,228" fill="#FACC15"/>
+                                <line x1="267" y1="246" x2="267" y2="255" stroke="#78350F" stroke-width="2"/>
+                                <line x1="273" y1="246" x2="273" y2="255" stroke="#78350F" stroke-width="2"/>
+                                <line x1="160" y1="40" x2="160" y2="250" stroke="#EAB308" stroke-width="7" stroke-linecap="round"/>
+                                <line x1="195" y1="40" x2="195" y2="250" stroke="#EAB308" stroke-width="7" stroke-linecap="round"/>
+                                <rect x="145" y="175" width="22" height="9" rx="2" fill="#B45309"/>
+                                <rect x="190" y="175" width="22" height="9" rx="2" fill="#B45309"/>
+                                <circle cx="177" cy="90" r="13" fill="#FCD34D"/>
+                                <rect x="168" y="103" width="20" height="28" rx="4" fill="#2563EB"/>
+                                <line x1="168" y1="112" x2="160" y2="100" stroke="#FCD34D" stroke-width="4.5" stroke-linecap="round"/>
+                                <line x1="188" y1="112" x2="195" y2="100" stroke="#FCD34D" stroke-width="4.5" stroke-linecap="round"/>
+                                <line x1="172" y1="131" x2="157" y2="175" stroke="#1E3A8A" stroke-width="4"/>
+                                <line x1="184" y1="131" x2="198" y2="175" stroke="#1E3A8A" stroke-width="4"/>
+                            </svg>
+                        </div>
+                        <div class="mt-3 p-3 rounded-2xl bg-slate-50 border border-slate-200 text-center">
+                            <span class="text-xs font-bold text-slate-800 block">Kecakapan Egrang Tradisional</span>
+                            <span class="text-[11px] text-slate-500">Berdiri tinggi melatih keberanian, koordinasi mata, dan ketenangan jiwa.</span>
+                        </div>
+                    </div>
+                `;
+            }
+
+            if (type === 'gasing') {
+                return `
+                    <div class="w-full h-full flex flex-col justify-between">
+                        <div class="relative w-full aspect-[4/3] rounded-2xl overflow-hidden border border-slate-200 shadow-sm bg-gradient-to-b from-sky-50 to-indigo-50 flex items-center justify-center p-2">
+                            <svg viewBox="0 0 320 280" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                                <ellipse cx="160" cy="225" rx="100" ry="25" fill="#E2E8F0" stroke="#94A3B8" stroke-width="2"/>
+                                <ellipse cx="160" cy="190" rx="75" ry="14" fill="none" stroke="#60A5FA" stroke-width="2.5" stroke-dasharray="8 6" opacity="0.8"/>
+                                <ellipse cx="160" cy="180" rx="90" ry="18" fill="none" stroke="#818CF8" stroke-width="2" stroke-dasharray="12 8" opacity="0.6"/>
+                                <ellipse cx="160" cy="170" rx="60" ry="12" fill="none" stroke="#F472B6" stroke-width="2" stroke-dasharray="6 6" opacity="0.7"/>
+                                <polygon points="125,160 195,160 160,222" fill="#B45309" stroke="#78350F" stroke-width="2"/>
+                                <polygon points="132,160 188,160 160,205" fill="#F59E0B"/>
+                                <polygon points="140,160 180,160 160,192" fill="#EF4444"/>
+                                <rect x="156" y="146" width="8" height="14" rx="2" fill="#78350F"/>
+                                <ellipse cx="160" cy="146" rx="14" ry="4" fill="#D97706"/>
+                                <circle cx="160" cy="223" r="2.5" fill="#0F172A"/>
+                                <circle cx="160" cy="222" r="6" fill="#FDE047" opacity="0.6"/>
+                                <path d="M275 80 Q230 110 190 145" stroke="#FFFFFF" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+                                <path d="M275 80 Q230 110 190 145" stroke="#CBD5E1" stroke-width="1.5" fill="none"/>
+                                <circle cx="280" cy="65" r="12" fill="#FCD34D"/>
+                                <rect x="270" y="78" width="18" height="24" rx="4" fill="#3B82F6"/>
+                                <line x1="270" y1="84" x2="255" y2="92" stroke="#FCD34D" stroke-width="3.5" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <div class="mt-3 p-3 rounded-2xl bg-slate-50 border border-slate-200 text-center">
+                            <span class="text-xs font-bold text-slate-800 block">Dendang Gasing Kayu Tradisional</span>
+                            <span class="text-[11px] text-slate-500">Sentakan tali melahirkan gaya sentrifugal seimbang yang memukau.</span>
+                        </div>
+                    </div>
+                `;
+            }
+
+            if (type === 'congklak') {
+                return `
+                    <div class="w-full h-full flex flex-col justify-between">
+                        <div class="relative w-full aspect-[4/3] rounded-2xl overflow-hidden border border-slate-200 shadow-sm bg-gradient-to-b from-amber-50 to-orange-50 flex items-center justify-center p-2">
+                            <svg viewBox="0 0 320 280" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="0" y="0" width="320" height="280" fill="#FFFBEB"/>
+                                <line x1="0" y1="70" x2="320" y2="70" stroke="#FDE68A" stroke-width="1.5"/>
+                                <line x1="0" y1="140" x2="320" y2="140" stroke="#FDE68A" stroke-width="1.5"/>
+                                <line x1="0" y1="210" x2="320" y2="210" stroke="#FDE68A" stroke-width="1.5"/>
+                                <rect x="35" y="115" width="250" height="70" rx="35" fill="#92400E" stroke="#78350F" stroke-width="3"/>
+                                <path d="M35 150 Q10 135 15 115 Q30 110 38 125 Z" fill="#B45309" stroke="#78350F" stroke-width="2"/>
+                                <circle cx="20" cy="120" r="2.5" fill="#FEF3C7"/>
+                                <path d="M285 150 Q310 140 305 125 Q290 120 282 135 Z" fill="#B45309" stroke="#78350F" stroke-width="2"/>
+                                <circle cx="62" cy="150" r="18" fill="#78350F"/>
+                                <circle cx="258" cy="150" r="18" fill="#78350F"/>
+                                <circle cx="98" cy="135" r="9" fill="#78350F"/>
+                                <circle cx="122" cy="135" r="9" fill="#78350F"/>
+                                <circle cx="146" cy="135" r="9" fill="#78350F"/>
+                                <circle cx="174" cy="135" r="9" fill="#78350F"/>
+                                <circle cx="198" cy="135" r="9" fill="#78350F"/>
+                                <circle cx="222" cy="135" r="9" fill="#78350F"/>
+                                <circle cx="98" cy="165" r="9" fill="#78350F"/>
+                                <circle cx="122" cy="165" r="9" fill="#78350F"/>
+                                <circle cx="146" cy="165" r="9" fill="#78350F"/>
+                                <circle cx="174" cy="165" r="9" fill="#78350F"/>
+                                <circle cx="198" cy="165" r="9" fill="#78350F"/>
+                                <circle cx="222" cy="165" r="9" fill="#78350F"/>
+                                <circle cx="60" cy="148" r="3.5" fill="#FFFFFF"/>
+                                <circle cx="65" cy="152" r="3" fill="#F8FAFC"/>
+                                <circle cx="98" cy="135" r="3" fill="#FFFFFF"/>
+                                <circle cx="146" cy="165" r="3" fill="#FFFFFF"/>
+                                <circle cx="198" cy="135" r="3" fill="#FFFFFF"/>
+                                <circle cx="222" cy="165" r="3" fill="#FFFFFF"/>
+                                <path d="M140 70 Q146 100 146 122" stroke="#FCD34D" stroke-width="7" stroke-linecap="round" fill="none"/>
+                                <circle cx="146" cy="126" r="4" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1"/>
+                            </svg>
+                        </div>
+                        <div class="mt-3 p-3 rounded-2xl bg-slate-50 border border-slate-200 text-center">
+                            <span class="text-xs font-bold text-slate-800 block">Papan Congklak Ukir Nusantara</span>
+                            <span class="text-[11px] text-slate-500">Membagikan biji kerang mengajarkan taktik hitung dan budi pekerti jujur.</span>
+                        </div>
+                    </div>
+                `;
+            }
+
+            if (type === 'kites') {
+                return `
+                    <div class="w-full h-full flex flex-col justify-between">
+                        <div class="relative w-full aspect-[4/3] rounded-2xl overflow-hidden border border-slate-200 shadow-sm bg-gradient-to-b from-indigo-200 via-rose-100 to-amber-100 flex items-center justify-center p-2">
+                            <svg viewBox="0 0 320 280" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="160" cy="220" r="36" fill="#F59E0B" opacity="0.6"/>
+                                <path d="M-20 220 Q80 200 160 215 Q240 200 340 220 L340 280 L-20 280 Z" fill="#047857"/>
+                                <rect x="90" y="235" width="140" height="35" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-dasharray="4 2"/>
+                                <line x1="160" y1="235" x2="160" y2="270" stroke="#FFFFFF" stroke-width="2"/>
+                                <circle cx="130" cy="245" r="5" fill="#FCD34D"/>
+                                <line x1="122" y1="250" x2="138" y2="250" stroke="#FCD34D" stroke-width="2"/>
+                                <circle cx="190" cy="245" r="5" fill="#FCD34D"/>
+                                <line x1="182" y1="250" x2="198" y2="250" stroke="#FCD34D" stroke-width="2"/>
+                                <polygon points="120,40 155,75 120,110 85,75" fill="#EF4444" stroke="#DC2626" stroke-width="2"/>
+                                <polygon points="120,50 145,75 120,100 95,75" fill="#FACC15"/>
+                                <line x1="120" y1="40" x2="120" y2="110" stroke="#78350F" stroke-width="1.5"/>
+                                <line x1="85" y1="75" x2="155" y2="75" stroke="#78350F" stroke-width="1.5"/>
+                                <path d="M120 110 Q105 130 115 150 Q130 170 120 190" stroke="#EF4444" stroke-width="3" fill="none" stroke-linecap="round"/>
+                                <polygon points="230,25 255,50 230,75 205,50" fill="#3B82F6" stroke="#2563EB" stroke-width="1.5"/>
+                                <path d="M230 75 Q245 95 235 115" stroke="#F59E0B" stroke-width="2" fill="none"/>
+                                <line x1="120" y1="75" x2="70" y2="225" stroke="#94A3B8" stroke-width="1" stroke-dasharray="2 2"/>
+                            </svg>
+                        </div>
+                        <div class="mt-3 p-3 rounded-2xl bg-slate-50 border border-slate-200 text-center">
+                            <span class="text-xs font-bold text-slate-800 block">Keceriaan Langit &amp; Benteng Gobak Sodor</span>
+                            <span class="text-[11px] text-slate-500">Meliuk bebas bersama angin sore dan kekompakan solidaritas regu.</span>
+                        </div>
+                    </div>
+                `;
+            }
+
+            if (type === 'quiz') {
+                return `
+                    <div class="w-full h-full flex flex-col justify-between">
+                        <div class="p-3.5 bg-slate-50 rounded-2xl border border-slate-200 mb-3">
+                            <h4 class="font-extrabold text-xs text-indigo-950 mb-2 flex items-center gap-1.5">
+                                <span class="w-2 h-2 rounded-full bg-indigo-600"></span>
+                                Pertanyaan 1:
+                            </h4>
+                            <p class="text-xs text-slate-700 mb-2 font-medium">
+                                Permainan melompat satu kaki di kotak kapur berbentuk sayap pesawat adalah...
+                            </p>
+                            <div class="grid grid-cols-1 gap-1.5">
+                                <button onclick="answerQuiz(1, 0, 1, this)" class="text-left px-3 py-2 rounded-xl text-xs font-bold bg-white border border-slate-200 hover:bg-indigo-50 transition-colors text-slate-700">
+                                    A. Gasing Kayu
+                                </button>
+                                <button onclick="answerQuiz(1, 1, 1, this)" class="text-left px-3 py-2 rounded-xl text-xs font-bold bg-white border border-slate-200 hover:bg-indigo-50 transition-colors text-slate-700">
+                                    B. Engklek / Sundamanda
+                                </button>
+                                <button onclick="answerQuiz(1, 2, 1, this)" class="text-left px-3 py-2 rounded-xl text-xs font-bold bg-white border border-slate-200 hover:bg-indigo-50 transition-colors text-slate-700">
+                                    C. Congklak Dakon
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="p-3.5 bg-slate-50 rounded-2xl border border-slate-200">
+                            <h4 class="font-extrabold text-xs text-indigo-950 mb-2 flex items-center gap-1.5">
+                                <span class="w-2 h-2 rounded-full bg-indigo-600"></span>
+                                Pertanyaan 2:
+                            </h4>
+                            <p class="text-xs text-slate-700 mb-2 font-medium">
+                                Benda kayu yang diputar kencang dengan tarikan tali hingga berdengung merdu adalah...
+                            </p>
+                            <div class="grid grid-cols-1 gap-1.5">
+                                <button onclick="answerQuiz(2, 0, 0, this)" class="text-left px-3 py-2 rounded-xl text-xs font-bold bg-white border border-slate-200 hover:bg-indigo-50 transition-colors text-slate-700">
+                                    A. Gasing Kayu Jati
+                                </button>
+                                <button onclick="answerQuiz(2, 1, 0, this)" class="text-left px-3 py-2 rounded-xl text-xs font-bold bg-white border border-slate-200 hover:bg-indigo-50 transition-colors text-slate-700">
+                                    B. Egrang Bambu
+                                </button>
+                                <button onclick="answerQuiz(2, 2, 0, this)" class="text-left px-3 py-2 rounded-xl text-xs font-bold bg-white border border-slate-200 hover:bg-indigo-50 transition-colors text-slate-700">
+                                    C. Layang-layang
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            return '';
+        }
+
+        window.answerQuiz = function(qNum, selectedIndex, correctIndex, btn) {
+            playPageFlipSound();
+            const parent = btn.parentElement;
+            parent.querySelectorAll('button').forEach(b => {
+                b.disabled = true;
+                b.className = 'text-left px-3 py-2 rounded-xl text-xs font-bold border border-slate-200 opacity-60 text-slate-500 bg-white';
+            });
+
+            if (selectedIndex === correctIndex) {
+                btn.className = 'text-left px-3 py-2 rounded-xl text-xs font-bold bg-emerald-500 text-white shadow-md border border-emerald-600';
+                btn.innerHTML += ' &bull; Hebat, Jawabanmu Benar!';
+            } else {
+                btn.className = 'text-left px-3 py-2 rounded-xl text-xs font-bold bg-rose-500 text-white shadow-md border border-rose-600';
+                btn.innerHTML += ' &bull; Masih Belum Tepat';
+                parent.children[correctIndex].className = 'text-left px-3 py-2 rounded-xl text-xs font-bold bg-emerald-100 text-emerald-900 border border-emerald-400 font-extrabold';
+            }
+        };
+
+        function renderCurrentSpread() {
+            const root = document.getElementById('flipbook-root');
+            const spread = SPREADS[currentSpreadIndex];
+
+            const badge = document.getElementById('page-status-badge');
+            if (currentSpreadIndex === 0) {
+                badge.innerText = 'Sampul Depan';
+            } else if (spread.right === 15) {
+                badge.innerText = 'Kuis & Sampul Penutup';
+            } else {
+                badge.innerText = `Halaman ${spread.left} - ${spread.right} dari 15`;
+            }
+
+            const prevDisabled = currentSpreadIndex === 0;
+            const nextDisabled = currentSpreadIndex === SPREADS.length - 1;
+
+            document.getElementById('btn-floating-prev').disabled = prevDisabled;
+            document.getElementById('btn-floating-next').disabled = nextDisabled;
+            document.getElementById('btn-bar-prev').disabled = prevDisabled;
+            document.getElementById('btn-bar-next').disabled = nextDisabled;
+
+            if (currentSpreadIndex === 0) {
+                const p1 = BOOK_PAGES[0];
+                root.innerHTML = `
+                    <div class="relative w-[300px] sm:w-[360px] lg:w-[390px] aspect-[3/4] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border-2 border-amber-400/60 bg-gradient-to-br from-indigo-950 via-slate-900 to-indigo-900 flex flex-col justify-between p-5 sm:p-6 transition-all duration-300">
+                        <div class="absolute inset-0 z-0 opacity-45 mix-blend-luminosity overflow-hidden">
+                            <img src="${p1.coverImg}" alt="${p1.title}" class="w-full h-full object-cover">
+                        </div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent z-1"></div>
+                        <div class="absolute inset-y-0 left-0 w-3 bg-gradient-to-r from-black/50 to-transparent z-10 pointer-events-none"></div>
+
+                        <div class="relative z-10 flex items-center justify-between">
+                            <span class="inline-flex items-center gap-1.5 text-[10px] sm:text-xs font-extrabold px-3 py-1 rounded-full bg-amber-400 text-slate-950 shadow-md">
+                                ${p1.badge}
+                            </span>
+                            <span class="text-xs font-bold text-amber-300">15 Halaman</span>
+                        </div>
+
+                        <div class="relative z-10 my-auto text-center py-4">
+                            <div class="w-28 h-28 sm:w-36 sm:h-36 mx-auto rounded-3xl overflow-hidden border-3 border-amber-400 shadow-2xl mb-4 group">
+                                <img src="${p1.coverImg}" alt="${p1.title}" class="w-full h-full object-cover">
+                            </div>
+                            <h2 class="font-display font-extrabold text-white text-xl sm:text-2xl lg:text-3xl leading-snug drop-shadow-md mb-2">
+                                CERIA DI KAMPUNG KAMI
+                            </h2>
+                            <p class="text-amber-300 font-bold text-xs sm:text-sm tracking-wide">
+                                5 Permainan Tradisional Indonesia
+                            </p>
+                        </div>
+
+                        <div class="relative z-10 pt-3 border-t border-white/20 flex items-center justify-between">
+                            <div class="text-[11px] text-indigo-200">
+                                <span>Karya Edukasi Cilik</span>
+                                <strong class="block text-white font-bold">Kak Rian &amp; Sahabat</strong>
+                            </div>
+                            <button onclick="flipNext()" class="px-4 py-2 rounded-xl text-xs font-extrabold text-slate-950 bg-amber-400 hover:bg-amber-300 shadow-lg transition-transform active:scale-95 flex items-center gap-1.5 cursor-pointer">
+                                <span>Buka Buku Cerita</span>
+                                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+
+            const leftData = BOOK_PAGES.find(p => p.pageNumber === spread.left);
+            const rightData = BOOK_PAGES.find(p => p.pageNumber === spread.right);
+
+            root.innerHTML = `
+                <div class="flex flex-row items-stretch w-[94vw] max-w-4xl lg:max-w-5xl h-[68vh] sm:h-[72vh] max-h-[630px] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-white/10 transition-all duration-300">
+                    
+                    <div class="book-page-white w-1/2 h-full relative flex flex-col justify-between p-4 sm:p-7 border-r border-slate-200">
+                        <div class="absolute inset-y-0 right-0 w-8 spine-shadow-left pointer-events-none z-10"></div>
+
+                        <div class="flex items-center justify-between pb-2 border-b border-slate-200 mb-2.5">
+                            <span class="text-[10px] sm:text-xs font-extrabold uppercase tracking-wider text-indigo-700">
+                                ${leftData.topic}
+                            </span>
+                            <span class="text-[10px] sm:text-xs font-bold text-slate-400">
+                                Hal ${leftData.pageNumber}
+                            </span>
+                        </div>
+
+                        <div class="flex-1 overflow-y-auto custom-scroll pr-1 flex flex-col justify-between">
+                            <h3 class="font-display font-extrabold text-slate-900 text-sm sm:text-base lg:text-lg mb-2">
+                                ${leftData.title}
+                            </h3>
+                            <div class="flex-1">
+                                ${getVectorIllustration(leftData.vectorType)}
+                            </div>
+                        </div>
+
+                        <div class="pt-2 border-t border-slate-100 flex items-center justify-between text-[10px] text-slate-400 font-medium">
+                            <span>Buku Cerita Anak Nusantara</span>
+                            <span class="font-bold text-slate-500">${leftData.pageNumber}</span>
+                        </div>
+                    </div>
+
+                    <div class="book-page-white w-1/2 h-full relative flex flex-col justify-between p-4 sm:p-7">
+                        <div class="absolute inset-y-0 left-0 w-8 spine-shadow-right pointer-events-none z-10"></div>
+
+                        <div class="flex items-center justify-between pb-2 border-b border-slate-200 mb-2.5">
+                            <span class="text-[10px] sm:text-xs font-bold text-slate-400">
+                                Hal ${rightData.pageNumber}
+                            </span>
+                            <span class="text-[10px] sm:text-xs font-extrabold uppercase tracking-wider text-indigo-700">
+                                ${rightData.topic}
+                            </span>
+                        </div>
+
+                        <div class="flex-1 overflow-y-auto custom-scroll pr-1">
+                            ${renderRightPageContent(rightData)}
+                        </div>
+
+                        <div class="pt-2 border-t border-slate-100 flex items-center justify-between text-[10px] text-slate-400 font-medium">
+                            <span class="font-bold text-slate-500">${rightData.pageNumber}</span>
+                            <span>CintaBaca Edukasi</span>
+                        </div>
+                    </div>
+
+                </div>
+            `;
+        }
+
+        function renderRightPageContent(data) {
+            if (data.type === 'backcover') {
+                return `
+                    <div class="h-full flex flex-col justify-between text-center py-2">
+                        <div class="w-16 h-16 sm:w-20 sm:h-20 mx-auto rounded-3xl bg-amber-100 border border-amber-300 flex items-center justify-center text-3xl mb-2 shadow-xs">
+                            🏆
+                        </div>
+                        <h4 class="font-extrabold text-sm sm:text-base text-slate-900 mb-1">
+                            Kamu Sahabat Cilik Pelestari Budaya!
+                        </h4>
+                        <p class="text-slate-600 text-[11px] sm:text-xs leading-relaxed mb-3">
+                            Selamat! Kamu telah menamatkan petualangan 5 permainan tradisional Indonesia. Sekarang, mari ajak teman dan keluarga bermain bersama di halaman rumah!
+                        </p>
+                        <div class="p-3 bg-slate-50 rounded-2xl border border-slate-200 text-slate-800 text-xs mb-3 text-left space-y-1">
+                            <div class="font-bold text-indigo-900">Rangkuman Warisan Nusantara:</div>
+                            <div class="text-[11px] text-slate-600">• Engklek (Keseimbangan) &bull; Egrang (Keberanian)</div>
+                            <div class="text-[11px] text-slate-600">• Gasing (Ketelitian) &bull; Congklak (Kejujuran)</div>
+                            <div class="text-[11px] text-slate-600">• Layang-layang &amp; Gobak Sodor (Kekompakan)</div>
+                        </div>
+                        <div class="flex justify-center gap-2">
+                            <button onclick="goToPage(1)" class="px-4 py-2 rounded-xl text-xs font-extrabold text-white bg-indigo-600 hover:bg-indigo-700 shadow-md transition-transform active:scale-95 cursor-pointer">
+                                🔄 Baca Ulang
+                            </button>
+                            <a href="./detail-buku.html" class="px-4 py-2 rounded-xl text-xs font-extrabold text-slate-700 bg-white border border-slate-300 hover:bg-slate-50 transition-colors">
+                                🏠 Selesai
+                            </a>
+                        </div>
+                    </div>
+                `;
+            }
+
+            return `
+                <div>
+                    <h3 class="font-display font-extrabold text-slate-900 text-sm sm:text-base lg:text-lg mb-2">
+                        ${data.title}
+                    </h3>
+                    ${data.storyHtml}
+                </div>
+            `;
+        }
+
+        function flipNext() {
+            if (currentSpreadIndex < SPREADS.length - 1) {
+                currentSpreadIndex++;
+                playPageFlipSound();
+                renderCurrentSpread();
+            }
+        }
+
+        function flipPrev() {
+            if (currentSpreadIndex > 0) {
+                currentSpreadIndex--;
+                playPageFlipSound();
+                renderCurrentSpread();
+            }
+        }
+
+        function goToPage(pageNumber) {
+            for (let i = 0; i < SPREADS.length; i++) {
+                if (SPREADS[i].right === pageNumber || SPREADS[i].left === pageNumber) {
+                    currentSpreadIndex = i;
+                    playPageFlipSound();
+                    renderCurrentSpread();
+                    closeTocModal();
+                    return;
+                }
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                flipNext();
+            } else if (e.key === 'ArrowLeft') {
+                flipPrev();
+            } else if (e.key.toLowerCase() === 'f') {
+                toggleFullscreen();
+            }
+        });
+
+        function toggleSound() {
+            isSoundEnabled = !isSoundEnabled;
+            document.getElementById('icon-sound').innerText = isSoundEnabled ? '🔊' : '🔇';
+            document.getElementById('text-sound').innerText = isSoundEnabled ? 'Suara' : 'Bisu';
+            if (isSoundEnabled) playPageFlipSound();
+        }
+
+        function toggleAutoPlay() {
+            isAutoPlaying = !isAutoPlaying;
+            const btn = document.getElementById('btn-autoplay');
+            if (isAutoPlaying) {
+                document.getElementById('icon-autoplay').innerText = '⏸';
+                document.getElementById('text-autoplay').innerText = 'Jeda';
+                btn.classList.add('bg-indigo-600/80', 'text-amber-300');
+                autoPlayTimer = setInterval(() => {
+                    if (currentSpreadIndex >= SPREADS.length - 1) {
+                        toggleAutoPlay();
+                    } else {
+                        flipNext();
+                    }
+                }, 7000);
+            } else {
+                document.getElementById('icon-autoplay').innerText = '▶';
+                document.getElementById('text-autoplay').innerText = 'Otomatis';
+                btn.classList.remove('bg-indigo-600/80', 'text-amber-300');
+                if (autoPlayTimer) clearInterval(autoPlayTimer);
+            }
+        }
+
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => {});
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        }
+
+        function openTocModal() {
+            const list = document.getElementById('toc-list');
+            const chapters = [
+                { page: 1, title: 'Sampul Depan: Ceria di Kampung Kami', desc: 'Cover Buku Bergambar' },
+                { page: 2, title: 'Pembuka: Pagi Ceria di Sukamaju & 4 Sahabat', desc: 'Halaman 2 - 3 (Cerita 1)' },
+                { page: 4, title: 'Permainan 1: Lompat Kotak Engklek Ceria', desc: 'Halaman 4 - 5 (Cerita 2)' },
+                { page: 6, title: 'Permainan 2: Menjulang Tinggi Egrang Bambu', desc: 'Halaman 6 - 7 (Cerita 3)' },
+                { page: 8, title: 'Permainan 3: Gasing Kayu Berputar Merdu', desc: 'Halaman 8 - 9 (Cerita 4)' },
+                { page: 10, title: 'Permainan 4: Congklak Biji Kerang di Beranda', desc: 'Halaman 10 - 11 (Cerita 5)' },
+                { page: 12, title: 'Permainan 5: Layang-Layang Sore & Gobak Sodor', desc: 'Halaman 12 - 13 (Cerita 6)' },
+                { page: 14, title: 'Kuis Asah Cerdas & Sampul Penutup', desc: 'Halaman 14 - 15 (Penutup)' }
+            ];
+
+            list.innerHTML = chapters.map(c => `
+                <div onclick="goToPage(${c.page})" class="flex items-center justify-between p-3 rounded-2xl bg-white/5 hover:bg-indigo-600/30 border border-white/10 transition-colors cursor-pointer">
+                    <div class="flex items-center gap-3">
+                        <span class="w-8 h-8 rounded-xl bg-amber-400 text-slate-950 font-black text-xs flex items-center justify-center">
+                            ${c.page}
+                        </span>
+                        <div>
+                            <div class="text-xs font-extrabold text-white">
+                                ${c.title}
+                            </div>
+                            <div class="text-[10px] text-indigo-300">
+                                ${c.desc}
+                            </div>
+                        </div>
+                    </div>
+                    <span class="text-xs text-amber-300 font-bold">Buka &rarr;</span>
+                </div>
+            `).join('');
+            document.getElementById('toc-modal').classList.remove('hidden');
+            document.getElementById('toc-modal').classList.add('flex');
+        }
+
+        function closeTocModal() {
+            document.getElementById('toc-modal').classList.add('hidden');
+            document.getElementById('toc-modal').classList.remove('flex');
+        }
+
+        function initStars() {
+            const container = document.getElementById('stars-field');
+            const numStars = 60;
+            for (let i = 0; i < numStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                const size = Math.random() * 3 + 1.5;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.setProperty('--duration', `${(Math.random() * 4 + 2).toFixed(1)}s`);
+                container.appendChild(star);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initStars();
+            renderCurrentSpread();
+        });
+    </script>
+</body>
+</html>
