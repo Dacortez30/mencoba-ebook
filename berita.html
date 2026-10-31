@@ -307,13 +307,13 @@
             </div>
         </div>
 
-        <!-- Filter kategori berita (Bar) -->
-        <div class="bg-white/95 backdrop-blur-md border-b border-stone-200/80 sticky top-16 z-30 shadow-xs mt-10">
+        <!-- Filter kategori berita (Static Bar - tidak ikut scroll) -->
+        <div class="bg-white/95 backdrop-blur-md border-b border-stone-200/80 relative shadow-xs mt-10">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                     
                     <!-- Category Pills -->
-                    <div class="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0 scrollbar-none" id="filter-tags-news">
+                    <div class="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden" id="filter-tags-news">
                         <button type="button" class="filter-tag active px-4 py-2 rounded-xl text-xs font-bold transition-all bg-indigo-600 text-white shadow-xs cursor-pointer flex-shrink-0" data-cat="semua" onclick="filterBerita('semua', this)">
                             Semua Kabar
                         </button>
