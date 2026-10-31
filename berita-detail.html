@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1D4ED8">
+    <title>Festival Literasi Anak Nusantara 2026 — Warta CintaBaca</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#EEF2FF', 100: '#E0E7FF', 200: '#C7D2FE', 300: '#A5B4FC',
+                            400: '#818CF8', 500: '#6366F1', 600: '#4F46E5', 700: '#4338CA',
+                            800: '#3730A3', 900: '#312E81'
+                        }
+                    },
+                    boxShadow: {
+                        premium: '0 1px 2px rgba(15,23,42,0.04), 0 20px 40px -12px rgba(79,70,229,0.18)',
+                        soft: '0 1px 2px rgba(15,23,42,0.04), 0 8px 24px -8px rgba(15,23,42,0.10)'
+                    },
+                    borderRadius: { '2xl': '1rem', '3xl': '1.5rem' }
+                }
+            }
+        }
+    </script>
+
+    <!-- Fonts: Plus Jakarta Sans & Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --indigo: #4F46E5;
+            --amber: #F59E0B;
+            --teal: #0D9488;
+            --surface-warm: #FFFDF9;
+            --ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; color: #334155; }
+        .font-display { font-family: 'Outfit', sans-serif; letter-spacing: -0.02em; }
+        .line-clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .nav-link.active { color: #4F46E5; font-weight: 700; }
+        .nav-link.active::after { width: 100%; }
+        .nav-link { position: relative; transition: color 0.25s var(--ease-premium); }
+        .nav-link::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 2px; background: linear-gradient(to right, #4F46E5, #818CF8); border-radius: 999px; transition: width 0.3s var(--ease-premium); }
+        .nav-link:hover::after { width: 100%; }
+        .nav-link:hover { color: #4F46E5; }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #FFFDF9; }
+        ::-webkit-scrollbar-thumb { background: #C7D2FE; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #4F46E5; }
+    </style>
+</head>
+<body class="bg-[#FFFDF9] text-slate-800 antialiased">
+
+    <!-- Scroll Reading Progress Bar -->
+    <div id="read-progress" class="fixed top-0 left-0 h-1 bg-gradient-to-r from-amber-400 via-indigo-500 to-indigo-600 z-50 transition-all duration-150" style="width: 0%;"></div>
+
+    <!-- Navbar -->
+    <nav class="sticky top-0 z-40 bg-[#FFFCF7]/95 backdrop-blur-md border-b border-orange-100/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+
+                <!-- Logo -->
+                <a href="./index.html" class="flex items-center gap-3 cursor-pointer select-none py-1 group">
+                    <div class="h-11 px-2.5 rounded-2xl flex items-center justify-center bg-white border border-slate-200/90 shadow-xs group-hover:border-indigo-400 group-hover:shadow-sm transition-all duration-200">
+                        <img src="./images/Transparent.png" alt="Cinta Baca" class="h-7 sm:h-8 w-auto object-contain transition-transform group-hover:scale-105 duration-200">
+                    </div>
+                    <div class="flex flex-col justify-center">
+                        <div class="font-display font-extrabold text-slate-900 text-base leading-tight tracking-tight group-hover:text-indigo-600 transition-colors">CintaBaca</div>
+                        <div class="text-[11px] text-indigo-600 font-bold leading-tight mt-0.5">Perpustakaan Digital</div>
+                    </div>
+                </a>
+
+                <!-- Desktop nav -->
+                <div class="hidden md:flex items-center gap-7">
+                    <a href="./index.html" class="nav-link text-sm font-semibold text-slate-600 hover:text-indigo-600">Beranda</a>
+                    <a href="./koleksi.html" class="nav-link text-sm font-semibold text-slate-600 hover:text-indigo-600">Koleksi</a>
+                    <a href="./berita.html" class="nav-link text-sm font-bold text-indigo-600 active">Berita</a>
+                    <a href="./tentang.html" class="nav-link text-sm font-semibold text-slate-600 hover:text-indigo-600">Tentang</a>
+                </div>
+
+                <!-- CTA + Language switcher + Mobile toggle -->
+                <div class="flex items-center gap-3">
+                    <div data-language-switcher class="hidden md:flex items-center rounded-full border border-slate-200 bg-slate-50 p-0.5 shadow-xs">
+                        <button type="button" data-lang="id" class="rounded-full px-2.5 py-1 text-xs font-bold transition-colors bg-indigo-600 text-white">ID</button>
+                        <button type="button" data-lang="en" class="rounded-full px-2.5 py-1 text-xs font-bold transition-colors text-slate-600">EN</button>
+                    </div>
+
+                    <a href="./index.html" class="hidden md:inline-flex items-center gap-1.5 text-xs font-bold text-slate-700 hover:text-indigo-600 transition-colors px-4 py-2 rounded-full border border-slate-200 hover:border-indigo-300 bg-white">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
+                            <polyline points="10 17 15 12 10 7"/>
+                            <line x1="15" y1="12" x2="3" y2="12"/>
+                        </svg>
+                        <span>Masuk</span>
+                    </a>
+                    <a href="./index.html" class="hidden md:inline-flex items-center gap-1.5 text-xs font-bold text-white px-5 py-2 rounded-full transition-all duration-200 bg-indigo-600 hover:bg-indigo-700 shadow-sm hover:shadow-md hover:-translate-y-0.5">
+                        <span>Daftar Gratis</span>
+                    </a>
+
+                    <!-- Mobile menu button -->
+                    <button onclick="toggleMobile()" class="md:hidden p-2 rounded-lg text-gray-500 hover:bg-gray-100 transition-colors">
+                        <svg id="menu-icon-open" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+                        </svg>
+                        <svg id="menu-icon-close" class="hidden" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 px-4 py-3 space-y-1">
+            <a href="./index.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition-colors">Beranda</a>
+            <a href="./koleksi.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition-colors">Koleksi</a>
+            <a href="./berita.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-bold text-indigo-600 bg-indigo-50 transition-colors">Berita</a>
+            <a href="./tentang.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition-colors">Tentang</a>
+        </div>
+    </nav>
+
+    <!-- Article Content -->
+    <main class="py-10 lg:py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Breadcrumb -->
+            <nav class="flex items-center gap-2 text-xs sm:text-sm text-slate-500 mb-8 font-medium flex-wrap">
+                <a href="./index.html" class="hover:text-indigo-600 transition-colors flex items-center gap-1">
+                    <svg class="w-4 h-4 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                    <span>Beranda</span>
+                </a>
+                <span class="text-slate-300">/</span>
+                <a href="./berita.html" class="hover:text-indigo-600 transition-colors flex items-center gap-1">
+                    <span>Warta Literasi</span>
+                </a>
+                <span class="text-slate-300">/</span>
+                <span class="text-slate-800 font-semibold">Event &amp; Festival</span>
+            </nav>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+
+                <!-- Main Article Column -->
+                <article class="lg:col-span-8 bg-white rounded-3xl p-6 sm:p-8 lg:p-10 border border-orange-100/80 shadow-soft">
+                    
+                    <!-- Category, Date, Read Time -->
+                    <div class="flex items-center gap-3 mb-4 flex-wrap">
+                        <span class="text-xs font-bold px-3 py-1 rounded-full border bg-amber-100 text-amber-900 border-amber-200">
+                            Event &amp; Festival
+                        </span>
+                        <span class="text-xs text-slate-500 flex items-center gap-1.5">
+                            <svg class="w-3.5 h-3.5 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                            <span>28 Oktober 2026, 09:30 WIB</span>
+                        </span>
+                        <span class="text-xs text-slate-500 flex items-center gap-1.5">
+                            <svg class="w-3.5 h-3.5 text-amber-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                            <span>3 menit baca</span>
+                        </span>
+                    </div>
+
+                    <!-- Headline -->
+                    <h1 class="font-display text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 leading-tight mb-6">
+                        Festival Literasi Anak Nusantara 2026: Merayakan Keceriaan Membaca Buku Bergambar
+                    </h1>
+
+                    <!-- Author & Editorial Pill -->
+                    <div class="flex items-center justify-between p-4 rounded-2xl bg-[#FFFCF7] border border-orange-100/90 mb-8 flex-wrap gap-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-11 h-11 rounded-full bg-gradient-to-tr from-indigo-600 to-indigo-400 text-white font-bold text-sm flex items-center justify-center shadow-xs">
+                                T
+                            </div>
+                            <div>
+                                <div class="text-sm font-bold text-slate-900 leading-tight">Tim Redaksi CintaBaca</div>
+                                <div class="text-xs text-slate-500 mt-0.5">Penulis &amp; Pegiat Literasi Anak</div>
+                            </div>
+                        </div>
+
+                        <!-- Quick Share icons -->
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs font-semibold text-slate-400 hidden sm:inline">Bagikan:</span>
+                            <a href="https://wa.me/?text=Festival%20Literasi%20Anak%20Nusantara%202026" target="_blank" class="w-8 h-8 rounded-full bg-emerald-50 text-emerald-600 hover:bg-emerald-600 hover:text-white flex items-center justify-center transition-colors" title="Bagikan ke WhatsApp">
+                                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+                            </a>
+                            <button type="button" onclick="copyLink(this)" class="px-3 py-1.5 rounded-full bg-indigo-50 text-indigo-700 hover:bg-indigo-600 hover:text-white text-xs font-bold flex items-center gap-1.5 transition-colors" title="Salin tautan">
+                                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                                <span id="copy-btn-text">Salin Link</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Featured Cover Image -->
+                    <div class="w-full aspect-[16/10] rounded-2xl overflow-hidden mb-8 border border-stone-200 shadow-sm bg-stone-100">
+                        <img 
+                            src="./images/kids-reading-hero.jpg" 
+                            alt="Festival Literasi Anak Nusantara 2026" 
+                            class="w-full h-full object-cover"
+                        >
+                    </div>
+
+                    <!-- Article Body -->
+                    <div class="prose max-w-none text-slate-800 leading-relaxed font-sans text-base sm:text-lg space-y-6">
+                        <p>
+                            <strong>BOGOR</strong> — Festival Literasi Anak Nusantara 2026 sukses diselenggarakan dengan penuh kehangatan dan keceriaan di kompleks perpustakaan CintaBaca. Ratusan anak dari berbagai penjuru hadir bersama orang tua mereka untuk mengikuti rangkaian agenda menyenangkan seputar buku cerita bergambar, pentas dongeng boneka tangan, dan pameran ilustrasi anak nasional.
+                        </p>
+                        <p>
+                            Direktur Edukasi dan Literasi Anak CintaBaca mengungkapkan bahwa minat baca generasi muda Indonesia terus menunjukkan peningkatan positif ketika mereka disajikan kisah visual yang ramah anak, edukatif, dan sarat dengan nilai-nilai empati budi pekerti luhur.
+                        </p>
+
+                        <div class="p-6 rounded-2xl bg-indigo-50/70 border border-indigo-100 my-8">
+                            <div class="flex items-start gap-4">
+                                <span class="text-3xl text-indigo-400 font-serif">“</span>
+                                <blockquote class="text-slate-800 font-medium italic text-base sm:text-lg leading-relaxed">
+                                    Ketika anak membuka selembar buku cerita bergambar, mereka bukan sekadar melihat gambar dan membaca kata, melainkan sedang membuka pintu gerbang imajinasi dan rasa percaya diri untuk mengarungi masa depan.
+                                </blockquote>
+                            </div>
+                        </div>
+
+                        <p>
+                            Dalam festival ini, anak-anak diajak membuat cerita bergambar mini karya mereka sendiri didampingi oleh ilustrator buku cerita profesional. Setiap peserta mendapatkan sertifikat apresiasi dan paket buku cerita bergambar gratis untuk dibawa pulang.
+                        </p>
+                        <p>
+                            Acara tahunan ini diharapkan menjadi katalisator bagi gerakan membaca 15 menit setiap hari di lingkungan keluarga, memastikan setiap rumah memiliki pojok membaca yang menyenangkan bagi buah hati tercinta.
+                        </p>
+                    </div>
+
+                    <!-- Back to News Button -->
+                    <div class="mt-10 pt-8 border-t border-stone-200/80 flex items-center justify-between">
+                        <a href="./berita.html" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold text-slate-700 bg-stone-100 hover:bg-stone-200 transition-colors">
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+                            <span>Kembali ke Warta Literasi</span>
+                        </a>
+                        <a href="./koleksi.html" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold text-white bg-indigo-600 hover:bg-indigo-700 transition-colors shadow-sm">
+                            <span>Baca Koleksi Buku Kami</span>
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Sidebar Column -->
+                <aside class="lg:col-span-4 space-y-8">
+                    
+                    <!-- Other News Widget -->
+                    <div class="bg-white rounded-3xl p-6 border border-orange-100/80 shadow-soft">
+                        <h3 class="font-display font-extrabold text-slate-900 text-base mb-4 flex items-center gap-2">
+                            <svg class="w-4 h-4 text-indigo-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <span>Warta Pilihan Lainnya</span>
+                        </h3>
+
+                        <div class="space-y-4">
+                            <a href="./berita.html" class="flex items-center gap-3.5 group">
+                                <div class="w-16 h-16 rounded-xl overflow-hidden bg-stone-100 flex-shrink-0 border border-stone-200">
+                                    <img src="./images/kids-books-landscape.jpg" alt="Pelestarian Cerita Nusantara" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                                </div>
+                                <div>
+                                    <span class="text-[10px] font-bold text-indigo-600 uppercase">Literasi</span>
+                                    <h4 class="text-xs font-bold text-slate-800 leading-snug line-clamp-2 group-hover:text-indigo-600 transition-colors">
+                                        Peluncuran 50 Koleksi Cerita Rakyat Nusantara Penuh Warna
+                                    </h4>
+                                    <span class="text-[10px] text-slate-400">25 Okt 2026</span>
+                                </div>
+                            </a>
+
+                            <a href="./berita.html" class="flex items-center gap-3.5 group">
+                                <div class="w-16 h-16 rounded-xl overflow-hidden bg-stone-100 flex-shrink-0 border border-stone-200">
+                                    <img src="./images/kids-reading-landscape.jpg" alt="5 Tips Membaca" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                                </div>
+                                <div>
+                                    <span class="text-[10px] font-bold text-emerald-600 uppercase">Tips Edukasi</span>
+                                    <h4 class="text-xs font-bold text-slate-800 leading-snug line-clamp-2 group-hover:text-indigo-600 transition-colors">
+                                        5 Tips Menumbuhkan Kebiasaan Membaca Menyenangkan
+                                    </h4>
+                                    <span class="text-[10px] text-slate-400">21 Okt 2026</span>
+                                </div>
+                            </a>
+
+                            <a href="./berita.html" class="flex items-center gap-3.5 group">
+                                <div class="w-16 h-16 rounded-xl overflow-hidden bg-stone-100 flex-shrink-0 border border-stone-200">
+                                    <img src="./images/kid-drawing-landscape.jpg" alt="Fitur E-Reader" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                                </div>
+                                <div>
+                                    <span class="text-[10px] font-bold text-sky-600 uppercase">Fitur</span>
+                                    <h4 class="text-xs font-bold text-slate-800 leading-snug line-clamp-2 group-hover:text-indigo-600 transition-colors">
+                                        Inovasi Fitur Pembaca Ramah Mata untuk Semua Anak
+                                    </h4>
+                                    <span class="text-[10px] text-slate-400">16 Okt 2026</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Call to action card -->
+                    <div class="rounded-3xl p-6 text-white relative overflow-hidden shadow-lg" style="background: linear-gradient(135deg, #1E3A8A 0%, #1D4ED8 50%, #3B82F6 100%);">
+                        <div class="relative z-10">
+                            <span class="inline-block px-3 py-1 rounded-full bg-white/20 text-[11px] font-bold tracking-wide uppercase mb-3">
+                                Sahabat CintaBaca
+                            </span>
+                            <h3 class="font-display font-extrabold text-lg sm:text-xl leading-snug mb-2">
+                                Baca Ribuan Buku Cerita Gratis Sekarang!
+                            </h3>
+                            <p class="text-blue-100 text-xs leading-relaxed mb-5">
+                                Akses tanpa batas ke fabel bergambar, cerita dongeng rakyat, dan buku sains interaktif ramah anak kapan saja.
+                            </p>
+                            <a href="./koleksi.html" class="inline-flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-amber-950 font-bold text-xs shadow-md transition-all">
+                                <span>Buka Rak Koleksi Cerita</span>
+                                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+                            </a>
+                        </div>
+                    </div>
+
+                </aside>
+
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer style="background:#0F0E2A" class="text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+
+                <!-- Brand -->
+                <div class="md:col-span-1">
+                    <a href="./index.html" class="inline-flex items-center gap-3 mb-4 group select-none">
+                        <div class="h-11 px-2.5 rounded-2xl flex items-center justify-center bg-white border border-white/20 shadow-xs group-hover:scale-105 transition-transform duration-200">
+                            <img src="./images/Transparent.png" alt="CintaBaca" class="h-7 sm:h-8 w-auto object-contain">
+                        </div>
+                        <div class="flex flex-col justify-center">
+                            <div class="font-display font-extrabold text-white text-base leading-tight tracking-tight group-hover:text-indigo-300 transition-colors">CintaBaca</div>
+                            <div class="text-[11px] text-indigo-300 font-semibold leading-tight mt-0.5">Perpustakaan Digital</div>
+                        </div>
+                    </a>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">Platform perpustakaan digital Indonesia. Ribuan buku, satu tujuan — membaca.</p>
+                </div>
+
+                <!-- Links -->
+                <div>
+                    <h4 class="text-sm font-semibold text-white uppercase tracking-wider mb-4">Platform</h4>
+                    <ul class="space-y-3">
+                        <li><a href="./koleksi.html" class="text-gray-400 text-sm hover:text-white transition-colors">Koleksi Cerita</a></li>
+                        <li><a href="./berita.html" class="text-gray-400 text-sm hover:text-white transition-colors">Warta &amp; Berita</a></li>
+                        <li><a href="./tentang.html" class="text-gray-400 text-sm hover:text-white transition-colors">Tentang Kami</a></li>
+                        <li><a href="./koleksi.html" class="text-gray-400 text-sm hover:text-white transition-colors">Pilihan Terfavorit</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-sm font-semibold text-white uppercase tracking-wider mb-4">Akses &amp; Layanan</h4>
+                    <ul class="space-y-3">
+                        <li><a href="./index.html" class="text-gray-400 text-sm hover:text-white transition-colors">Masuk</a></li>
+                        <li><a href="./index.html" class="text-gray-400 text-sm hover:text-white transition-colors">Daftar Gratis</a></li>
+                        <li><a href="./koleksi.html" class="text-gray-400 text-sm hover:text-white transition-colors">Jelajahi Level Baca</a></li>
+                        <li><a href="./tentang.html" class="text-gray-400 text-sm hover:text-white transition-colors">Pojok Belajar</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-sm font-semibold text-white uppercase tracking-wider mb-4">Kontak &amp; Lokasi</h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-2 text-gray-400 text-sm">
+                            <svg class="mt-0.5 flex-shrink-0" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                            <span>halo@cintabaca.id</span>
+                        </li>
+                        <li class="flex items-start gap-2 text-gray-400 text-sm">
+                            <svg class="mt-0.5 flex-shrink-0" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.44C1.45 2.18 2.37 1 3.62 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l.82-.82a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                            <span>+62 21 1234 5678</span>
+                        </li>
+                        <li class="flex items-start gap-2 text-gray-400 text-sm">
+                            <svg class="mt-0.5 flex-shrink-0" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                            <span>Perpustakaan Cinta Baca, Kota Bogor, Jawa Barat</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t pt-8 flex flex-col sm:flex-row justify-between items-center gap-4" style="border-color:rgba(255,255,255,0.08)">
+                <p class="text-gray-500 text-sm">© 2026 CintaBaca Digital. Semua hak dilindungi.</p>
+                <div class="flex gap-6">
+                    <a href="#" class="text-gray-500 text-xs hover:text-gray-300 transition-colors">Privasi</a>
+                    <a href="#" class="text-gray-500 text-xs hover:text-gray-300 transition-colors">Syarat Layanan</a>
+                    <a href="#" class="text-gray-500 text-xs hover:text-gray-300 transition-colors">Cookie</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMobile() {
+            const menu = document.getElementById('mobile-menu');
+            const iconOpen = document.getElementById('menu-icon-open');
+            const iconClose = document.getElementById('menu-icon-close');
+            if (menu) {
+                menu.classList.toggle('hidden');
+                if (iconOpen) iconOpen.classList.toggle('hidden');
+                if (iconClose) iconClose.classList.toggle('hidden');
+            }
+        }
+
+        function copyLink(btn) {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                const textSpan = document.getElementById('copy-btn-text');
+                if (textSpan) {
+                    textSpan.textContent = 'Tersalin!';
+                    setTimeout(() => { textSpan.textContent = 'Salin Link'; }, 2000);
+                }
+            });
+        }
+
+        window.addEventListener('scroll', function() {
+            const scroll = window.scrollY;
+            const height = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = (scroll / height) * 100;
+            const progressBar = document.getElementById('read-progress');
+            if (progressBar) progressBar.style.width = progress + '%';
+        });
+    </script>
+</body>
+</html>
+
