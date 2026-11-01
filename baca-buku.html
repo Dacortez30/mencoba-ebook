@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ceria di Kampung Kami: Permainan Tradisional — Buku Flip Edukasi Interaktif</title>
 
-    <!-- Google Fonts: Nunito & Quicksand -->
+    <!-- Google Fonts: Fredoka & Baloo 2 (Tipografi Ramah & Ceria untuk Anak-Anak) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Quicksand:wght@600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@600;700;800&display=swap" rel="stylesheet">
 
     <!-- Tailwind CSS (CDN Standalone) -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -22,7 +22,7 @@
         }
 
         body {
-            font-family: 'Nunito', 'Quicksand', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Fredoka', 'Quicksand', -apple-system, BlinkMacSystemFont, sans-serif;
             background: #0a0e27;
             color: #f1f5f9;
             overflow: hidden;
@@ -62,8 +62,9 @@
         }
 
         .book-page-white {
-            background-color: #ffffff !important;
-            color: #0f172a;
+            font-family: 'Baloo 2', 'Fredoka', 'Quicksand', cursive, sans-serif !important;
+            background: linear-gradient(180deg, #ffffff 0%, #fffdf8 100%) !important;
+            color: #272052 !important;
             box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(0, 0, 0, 0.06);
             overflow: hidden;
             backface-visibility: hidden;
@@ -82,6 +83,94 @@
         .custom-scroll::-webkit-scrollbar-thumb {
             background: rgba(148, 163, 184, 0.4);
             border-radius: 999px;
+        }
+
+        /* Dynamic Typography Scaling & Joyful Kid-Friendly Palette */
+        :root {
+            --text-scale: 1.25;
+        }
+
+        .book-page-white h1,
+        .book-page-white h2,
+        .book-page-white h3,
+        .book-page-white h4,
+        .book-page-white .font-display {
+            font-family: 'Fredoka', 'Baloo 2', 'Quicksand', cursive, sans-serif !important;
+            letter-spacing: 0.02em;
+        }
+
+        .book-page-white h3 {
+            font-size: calc(1.38rem * var(--text-scale, 1.25)) !important;
+            line-height: 1.35 !important;
+            color: #2e1065 !important;
+            font-weight: 700 !important;
+        }
+
+        .book-page-white h4 {
+            font-size: calc(1.2rem * var(--text-scale, 1.25)) !important;
+            line-height: 1.35 !important;
+            color: #4338ca !important;
+            font-weight: 600 !important;
+        }
+
+        .book-page-white p {
+            font-size: calc(1.06rem * var(--text-scale, 1.25)) !important;
+            line-height: 1.72 !important;
+            color: #292357 !important;
+            font-weight: 500;
+        }
+
+        .book-page-white li {
+            font-size: calc(1.0rem * var(--text-scale, 1.25)) !important;
+            line-height: 1.65 !important;
+            color: #2d265c !important;
+            font-weight: 500;
+        }
+
+        .book-page-white .text-sm {
+            font-size: calc(1.04rem * var(--text-scale, 1.25)) !important;
+            color: #2e265c !important;
+        }
+
+        .book-page-white .text-xs {
+            font-size: calc(0.96rem * var(--text-scale, 1.25)) !important;
+            line-height: 1.55 !important;
+            color: #3b3368 !important;
+        }
+
+        .book-page-white .text-\[11px\] {
+            font-size: calc(0.9rem * var(--text-scale, 1.25)) !important;
+            line-height: 1.5 !important;
+            color: #473e75 !important;
+        }
+
+        .book-page-white .text-\[10px\] {
+            font-size: calc(0.84rem * var(--text-scale, 1.25)) !important;
+            color: #635b8e !important;
+        }
+
+        .book-page-white .text-slate-700,
+        .book-page-white .text-slate-600,
+        .book-page-white .text-slate-500 {
+            color: #342c62 !important;
+        }
+
+        .book-page-white .text-slate-800,
+        .book-page-white .text-slate-900 {
+            color: #1e1548 !important;
+        }
+
+        .book-page-white em,
+        .book-page-white i {
+            color: #7c3aed;
+            font-style: italic;
+            font-weight: 600;
+        }
+
+        .book-page-white strong,
+        .book-page-white b {
+            color: #1e1b4b;
+            font-weight: 700;
         }
     </style>
 </head>
@@ -137,7 +226,7 @@
             <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
         </button>
 
-        <div class="stage-container flex items-center justify-center w-full max-w-5xl h-[74vh] sm:h-[77vh] max-h-[720px]">
+        <div class="stage-container flex items-center justify-center w-full max-w-5xl xl:max-w-6xl h-[74vh] sm:h-[78vh] max-h-[740px]">
             <div id="flipbook-root" class="book-spread relative flex items-center justify-center transition-all duration-300">
                 <!-- Konten 2 Halaman Putih Dinamis -->
             </div>
@@ -201,6 +290,13 @@
                 <span id="text-sound" class="hidden sm:inline">Suara</span>
             </button>
 
+            <!-- Font Size Scaler (A- / A+) -->
+            <div class="flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-white/10 hover:bg-white/15 border border-white/15 transition-colors">
+                <button type="button" onclick="changeFontSize(-1)" class="w-6 h-6 rounded-full hover:bg-white/20 active:bg-white/30 flex items-center justify-center text-xs font-extrabold text-slate-200 transition-colors cursor-pointer" title="Kecilkan Huruf">A-</button>
+                <span id="font-size-label" class="text-[11px] font-extrabold text-amber-300 px-1 select-none min-w-[34px] text-center">125%</span>
+                <button type="button" onclick="changeFontSize(1)" class="w-6 h-6 rounded-full hover:bg-white/20 active:bg-white/30 flex items-center justify-center text-xs font-extrabold text-slate-200 transition-colors cursor-pointer" title="Besarkan Huruf">A+</button>
+            </div>
+
             <button 
                 onclick="openTocModal()" 
                 class="px-2.5 sm:px-3 py-1 rounded-full hover:bg-white/15 active:bg-white/25 flex items-center gap-1.5 transition-colors cursor-pointer text-slate-200"
@@ -257,34 +353,34 @@
                 topic: 'KISAH SAHABAT CILIK',
                 title: 'Hari Ini Tanpa Layar Gadget',
                 storyHtml: `
-                    <p class="text-slate-700 leading-relaxed text-xs sm:text-sm mb-3">
+                    <p class="leading-relaxed mb-3 font-medium">
                         Matahari pagi menyinari atap rumah panggung di Kampung Sukamaju. Udara terasa sejuk, burung pipit berkicau riang di ranting pohon kelapa.
                     </p>
-                    <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 mb-3.5">
-                        <h4 class="font-bold text-xs text-indigo-900 mb-2 flex items-center gap-1.5">
-                            <span class="w-2 h-2 rounded-full bg-indigo-600"></span>
+                    <div class="p-3.5 rounded-2xl bg-gradient-to-br from-indigo-50/90 via-purple-50/60 to-pink-50/50 border-2 border-indigo-200/80 mb-3.5 shadow-2xs">
+                        <h4 class="font-extrabold text-xs text-indigo-900 mb-2 flex items-center gap-1.5">
+                            <span class="w-2.5 h-2.5 rounded-full bg-indigo-600 animate-pulse"></span>
                             Empat Sahabat Setia:
                         </h4>
-                        <div class="grid grid-cols-2 gap-2 text-[11px] text-slate-600">
-                            <div class="p-2 rounded-xl bg-white border border-slate-200/80">
-                                <strong class="text-indigo-600 block">Rian</strong> Si Cerdik &amp; Pemikir
+                        <div class="grid grid-cols-2 gap-2 text-xs">
+                            <div class="p-2.5 rounded-xl bg-white/95 border-2 border-sky-200 shadow-2xs hover:border-sky-400 transition-colors">
+                                <strong class="text-sky-600 block text-xs font-black">👦 Rian</strong> Si Cerdik &amp; Pemikir
                             </div>
-                            <div class="p-2 rounded-xl bg-white border border-slate-200/80">
-                                <strong class="text-amber-600 block">Siti</strong> Si Lincah &amp; Penuh Tawa
+                            <div class="p-2.5 rounded-xl bg-white/95 border-2 border-amber-200 shadow-2xs hover:border-amber-400 transition-colors">
+                                <strong class="text-amber-600 block text-xs font-black">👧 Siti</strong> Si Lincah &amp; Penuh Tawa
                             </div>
-                            <div class="p-2 rounded-xl bg-white border border-slate-200/80">
-                                <strong class="text-emerald-600 block">Budi</strong> Si Tangguh &amp; Pemberani
+                            <div class="p-2.5 rounded-xl bg-white/95 border-2 border-emerald-200 shadow-2xs hover:border-emerald-400 transition-colors">
+                                <strong class="text-emerald-600 block text-xs font-black">👦 Budi</strong> Si Tangguh &amp; Pemberani
                             </div>
-                            <div class="p-2 rounded-xl bg-white border border-slate-200/80">
-                                <strong class="text-rose-600 block">Maya</strong> Si Teliti &amp; Kreatif
+                            <div class="p-2.5 rounded-xl bg-white/95 border-2 border-rose-200 shadow-2xs hover:border-rose-400 transition-colors">
+                                <strong class="text-rose-600 block text-xs font-black">👧 Maya</strong> Si Teliti &amp; Kreatif
                             </div>
                         </div>
                     </div>
-                    <p class="text-slate-700 text-xs leading-relaxed mb-3">
-                        "Teman-teman! Ayo simpan gawai di meja. Hari ini kita buktikan bahwa bermain bersama di luar ruangan jauh lebih seru!" seru Siti sambil membawa kapur warna-warni.
-                    </p>
-                    <div class="p-2.5 rounded-xl bg-indigo-50/70 border border-indigo-200 text-indigo-950 text-[11px] font-semibold">
-                        Pesan Hangat: Bermain bersama teman melatih tubuh sehat, kepekaan empati, dan keceriaan alami.
+                    <div class="p-3 rounded-2xl bg-amber-50/80 border-l-4 border-amber-400 mb-3 text-amber-950 font-medium">
+                        "Teman-teman! Ayo simpan gawai di meja. Hari ini kita buktikan bahwa bermain bersama di luar ruangan jauh lebih seru!" seru <strong class="text-amber-700">Siti</strong> sambil membawa kapur warna-warni.
+                    </div>
+                    <div class="p-3 rounded-2xl bg-gradient-to-r from-indigo-100/70 via-purple-100/60 to-pink-100/60 border border-indigo-200 text-indigo-950 text-xs font-semibold flex items-center gap-2">
+                        <span class="text-lg">💖</span> <span><strong>Pesan Hangat:</strong> Bermain bersama melatih tubuh sehat, empati hangat, dan keceriaan alami.</span>
                     </div>
                 `
             },
@@ -301,22 +397,31 @@
                 topic: 'CARA BERMAIN & SAINS KAKI',
                 title: 'Lompat Satu Kaki Menuju Bintang',
                 storyHtml: `
-                    <p class="text-slate-700 leading-relaxed text-xs sm:text-sm mb-3">
+                    <p class="leading-relaxed mb-3 font-medium">
                         Siti menggambar 8 kotak bernomor di tanah lapang berpasir halus. Bentuknya gagah menyerupai sayap pesawat terbang yang siap meluncur.
                     </p>
-                    <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 mb-3 space-y-2">
-                        <div class="font-bold text-xs text-amber-900 flex items-center gap-1.5">
-                            <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+                    <div class="p-3.5 rounded-2xl bg-gradient-to-br from-amber-50/90 to-yellow-50/50 border-2 border-amber-200/80 mb-3 space-y-2.5 shadow-2xs">
+                        <div class="font-extrabold text-xs text-amber-900 flex items-center gap-1.5">
+                            <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
                             3 Langkah Bermain Engklek:
                         </div>
-                        <ul class="text-[11px] sm:text-xs text-slate-600 space-y-1.5 pl-4 list-decimal">
-                            <li><strong>Lempar Gaco:</strong> Lemparkan batu ceper ke kotak nomor 1 tanpa keluar garis.</li>
-                            <li><strong>Lompat Satu Kaki:</strong> Lewati kotak yang ada batunya dengan kaki terangkat satu.</li>
-                            <li><strong>Sayap Ganda:</strong> Pada kotak 4 &amp; 5, kedua kaki boleh mendarat bersamaan untuk beristirahat sejenak!</li>
+                        <ul class="space-y-2 text-xs text-amber-950 font-medium">
+                            <li class="flex items-start gap-2">
+                                <span class="w-5 h-5 rounded-full bg-amber-400 text-amber-950 text-[11px] font-black flex items-center justify-center shrink-0">1</span>
+                                <span><strong class="text-amber-800">Lempar Gaco:</strong> Lemparkan batu ceper ke kotak nomor 1 tanpa keluar garis.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="w-5 h-5 rounded-full bg-amber-400 text-amber-950 text-[11px] font-black flex items-center justify-center shrink-0">2</span>
+                                <span><strong class="text-amber-800">Lompat Satu Kaki:</strong> Lewati kotak yang ada batunya dengan kaki terangkat satu!</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="w-5 h-5 rounded-full bg-amber-400 text-amber-950 text-[11px] font-black flex items-center justify-center shrink-0">3</span>
+                                <span><strong class="text-amber-800">Sayap Ganda:</strong> Pada kotak 4 &amp; 5, kedua kaki boleh mendarat bersamaan untuk istirahat sejenak!</span>
+                            </li>
                         </ul>
                     </div>
-                    <div class="p-3 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-950 text-[11px] leading-relaxed">
-                        <strong>Manfaat Kebugaran:</strong> Melatih kekuatan otot paha, memperkuat pergelangan kaki, dan mengasah estimasi jarak ruang (*spatial balance*) anak.
+                    <div class="p-3 rounded-2xl bg-gradient-to-r from-emerald-50 to-teal-50 border-2 border-emerald-200 text-emerald-950 text-xs leading-relaxed flex items-center gap-2">
+                        <span class="text-lg">🏃</span> <span><strong class="text-emerald-800">Manfaat Kebugaran:</strong> Melatih kekuatan otot paha, memperkokoh keseimbangan, dan melatih fokus gerak tubuh!</span>
                     </div>
                 `
             },
@@ -333,27 +438,29 @@
                 topic: 'KETANGKASAN & KEBERANIAN',
                 title: 'Setinggi Dahan Pohon Jambu',
                 storyHtml: `
-                    <p class="text-slate-700 leading-relaxed text-xs sm:text-sm mb-3">
+                    <p class="leading-relaxed mb-3 font-medium">
                         Budi mengeluarkan dua bilah bambu wulung panjang dengan pijakan kayu kokoh setinggi satu meter dari tanah.
                     </p>
-                    <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 mb-3">
-                        <p class="text-xs text-slate-700 leading-relaxed mb-2">
+                    <div class="p-3.5 rounded-2xl bg-gradient-to-br from-emerald-50/90 to-teal-50/50 border-2 border-emerald-200 mb-3 space-y-1.5 shadow-2xs">
+                        <p class="text-xs text-emerald-950">
                             Dengan tenang, Budi memegang kedua tiang bambu sejajar dada. Dalam satu kayuhan mantap, ia melangkah naik!
                         </p>
-                        <p class="text-xs font-bold text-emerald-800 italic">
+                        <p class="text-xs font-extrabold text-emerald-700 italic border-l-4 border-emerald-400 pl-2">
                             "Wah, sekarang aku bisa melihat seluruh perkampungan dan memetik buah jambu air tanpa tangga!" seru Budi riang.
                         </p>
                     </div>
-                    <div class="space-y-2 text-[11px] text-slate-600 mb-3">
-                        <div class="flex items-center gap-2 p-2 rounded-xl bg-white border border-slate-200">
-                            <span class="font-bold text-indigo-600">Pusat Massa:</span> Gerakan tangan dan kaki harus seirama agar titik berat tubuh tidak condong ke belakang.
+                    <div class="space-y-2 text-xs text-slate-700 mb-3">
+                        <div class="p-2.5 rounded-xl bg-indigo-50/80 border-2 border-indigo-200 text-indigo-950 flex items-center gap-2">
+                            <span class="font-black text-indigo-700 bg-white px-2 py-0.5 rounded-md border border-indigo-100 text-xs shrink-0">Pusat Massa</span>
+                            <span>Gerakan tangan &amp; kaki seirama menjaga titik berat tubuh tetap seimbang.</span>
                         </div>
-                        <div class="flex items-center gap-2 p-2 rounded-xl bg-white border border-slate-200">
-                            <span class="font-bold text-emerald-600">Nama Daerah:</span> Dikenal sebagai <em>Tengkak-tengkak</em> di Minangkabau dan <em>Batungkau</em> di Kalimantan Selatan.
+                        <div class="p-2.5 rounded-xl bg-teal-50/80 border-2 border-teal-200 text-teal-950 flex items-center gap-2">
+                            <span class="font-black text-teal-700 bg-white px-2 py-0.5 rounded-md border border-teal-100 text-xs shrink-0">Nama Daerah</span>
+                            <span><em>Tengkak-tengkak</em> di Minangkabau &bull; <em>Batungkau</em> di Kalsel.</span>
                         </div>
                     </div>
-                    <div class="p-2.5 rounded-xl bg-amber-50 border border-amber-200 text-amber-950 text-[11px] font-semibold">
-                        Pelajaran Karakter: Mengalahkan rasa takut jatuh dan melatih rasa percaya diri tinggi.
+                    <div class="p-3 rounded-2xl bg-gradient-to-r from-amber-100/70 to-yellow-50 border border-amber-300 text-amber-950 text-xs font-semibold flex items-center gap-2">
+                        <span class="text-base">🎋</span> <span><strong>Pelajaran Karakter:</strong> Mengalahkan rasa takut dan menumbuhkan rasa percaya diri yang tinggi!</span>
                     </div>
                 `
             },
@@ -370,29 +477,29 @@
                 topic: 'SAINS CILIK & KETELITIAN',
                 title: 'Sentakan Tali yang Sempurna',
                 storyHtml: `
-                    <p class="text-slate-700 leading-relaxed text-xs sm:text-sm mb-3">
+                    <p class="leading-relaxed mb-3 font-medium">
                         Rian memegang gasing kayu jati yang telah diukir halus. Maya membantu melilitkan tali katun putih dari pucuk poros hingga leher gasing dengan sangat rapi.
                     </p>
-                    <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 mb-3">
-                        <p class="text-xs text-slate-700 leading-relaxed mb-2">
-                            Rian mengarahkan tangan ke depan, lalu menyentak tali dengan cepat... <em>Wuuusshhh!</em>
+                    <div class="p-3.5 rounded-2xl bg-gradient-to-br from-violet-50/90 to-indigo-50/60 border-2 border-violet-200 mb-3 space-y-1.5 shadow-2xs">
+                        <p class="text-xs text-violet-950">
+                            Rian mengarahkan tangan ke depan, lalu menyentak tali dengan cepat... <span class="px-2 py-0.5 rounded-md bg-purple-600 text-white font-black text-[11px] shadow-2xs">Wuuusshhh!</span>
                         </p>
-                        <p class="text-xs font-bold text-indigo-700">
-                            Gasing berputar sangat kencang di atas lempengan batu datar. Suara dengungannya terdengar seperti lebah yang sedang menyanyi!
+                        <p class="text-xs font-extrabold text-indigo-700">
+                            Gasing berputar sangat kencang di atas batu datar. Suara dengungannya terdengar seperti lebah sedang bernyanyi riang!
                         </p>
                     </div>
-                    <div class="space-y-2 text-[11px] text-slate-600 mb-3">
-                        <div class="p-2 rounded-xl bg-white border border-slate-200">
-                            <strong class="text-slate-900 block font-bold">Gaya Sentrifugal:</strong>
-                            Putaran kencang menciptakan gaya ke arah luar yang menahan poros gasing agar tidak tumbang melawan tarikan gravitasi.
+                    <div class="space-y-2 text-xs mb-3">
+                        <div class="p-2.5 rounded-xl bg-purple-50/80 border-2 border-purple-200 text-purple-950">
+                            <strong class="text-purple-700 block font-black mb-0.5">🌀 Gaya Sentrifugal:</strong>
+                            Putaran kencang menciptakan gaya ke arah luar yang menahan poros gasing agar tidak tumbang melawan gravitasi.
                         </div>
-                        <div class="p-2 rounded-xl bg-white border border-slate-200">
-                            <strong class="text-slate-900 block font-bold">Ilusi Warna:</strong>
-                            Garis-garis warna merah dan biru pada badan gasing berpadu menjadi warna ungu keemasan saat berputar.
+                        <div class="p-2.5 rounded-xl bg-sky-50/80 border-2 border-sky-200 text-sky-950">
+                            <strong class="text-sky-700 block font-black mb-0.5">🎨 Ilusi Warna:</strong>
+                            Garis-garis merah dan biru pada badan gasing berpadu menjadi ungu keemasan yang indah saat berputar!
                         </div>
                     </div>
-                    <div class="p-2.5 rounded-xl bg-violet-50 border border-violet-200 text-violet-950 text-[11px] font-semibold">
-                        Nilai Luhur: Mengajarkan ketelitian tangan dan kesabaran saat menyiapkan lilitan tali.
+                    <div class="p-3 rounded-2xl bg-gradient-to-r from-violet-100/70 to-purple-50 border border-violet-300 text-violet-950 text-xs font-semibold flex items-center gap-2">
+                        <span class="text-base">🪵</span> <span><strong>Nilai Luhur:</strong> Melatih ketelitian tangan dan kesabaran anak dalam menyiapkan lilitan tali.</span>
                     </div>
                 `
             },
@@ -409,29 +516,29 @@
                 topic: 'ASAH OTAK & KEJUJURAN',
                 title: 'Strategi Lumbung Padi Penuh',
                 storyHtml: `
-                    <p class="text-slate-700 leading-relaxed text-xs sm:text-sm mb-3">
+                    <p class="leading-relaxed mb-3 font-medium">
                         Saat sinar matahari siang menghangat, Siti dan Maya duduk bersila di teras rumah bambu yang teduh. Di antara mereka terbentang papan congklak kayu jati berbentuk ukiran kepala naga.
                     </p>
-                    <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 mb-3">
-                        <p class="text-xs text-slate-700 leading-relaxed mb-2">
+                    <div class="p-3.5 rounded-2xl bg-gradient-to-br from-rose-50/90 to-pink-50/60 border-2 border-rose-200 mb-3 space-y-1.5 shadow-2xs">
+                        <p class="text-xs text-rose-950">
                             Jari-jemari lincah mereka membagikan biji kerang sawo putih satu per satu ke dalam lubang-lubang kecil searah jarum jam.
                         </p>
-                        <p class="text-xs font-bold text-rose-700">
-                            <em>Klitik... klitik...</em> Bunyi dentingan kerang berpadu indah dengan hembusan angin sejuk perbukitan.
+                        <p class="text-xs font-extrabold text-rose-700">
+                            <span class="px-2 py-0.5 rounded-md bg-rose-500 text-white font-black text-[11px] shadow-2xs">Klitik... klitik...</span> Bunyi dentingan kerang berpadu indah dengan hembusan angin sejuk perbukitan.
                         </p>
                     </div>
-                    <div class="space-y-2 text-[11px] text-slate-600 mb-3">
-                        <div class="p-2 rounded-xl bg-white border border-slate-200">
-                            <strong class="text-slate-900 block font-bold">Matematika Cepat:</strong>
-                            Menghitung sisa biji agar giliran tidak mati di lubang kosong pihak lawan.
+                    <div class="space-y-2 text-xs mb-3">
+                        <div class="p-2.5 rounded-xl bg-rose-50/80 border-2 border-rose-200 text-rose-950">
+                            <strong class="text-rose-700 block font-black mb-0.5">🧮 Matematika Cepat:</strong>
+                            Menghitung sisa biji agar giliran langkah tidak mati di lubang kosong lawan.
                         </div>
-                        <div class="p-2 rounded-xl bg-white border border-slate-200">
-                            <strong class="text-slate-900 block font-bold">Amanah &amp; Jujur:</strong>
-                            Menjatuhkan tepat satu biji di tiap lubang tanpa boleh berbuat curang.
+                        <div class="p-2.5 rounded-xl bg-emerald-50/80 border-2 border-emerald-200 text-emerald-950">
+                            <strong class="text-emerald-700 block font-black mb-0.5">🤝 Amanah &amp; Jujur:</strong>
+                            Menjatuhkan tepat satu biji di tiap lubang tanpa boleh berbuat curang!
                         </div>
                     </div>
-                    <div class="p-2.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-950 text-[11px] font-semibold">
-                        Warisan Luhur: Permainan ketenangan pikiran yang dimainkan sejak masa kerajaan kuno Nusantara.
+                    <div class="p-3 rounded-2xl bg-gradient-to-r from-pink-100/70 to-rose-50 border border-rose-300 text-rose-950 text-xs font-semibold flex items-center gap-2">
+                        <span class="text-base">🐚</span> <span><strong>Warisan Luhur:</strong> Permainan strategi damai warisan nusantara yang mengasah ketenangan pikiran.</span>
                     </div>
                 `
             },
@@ -448,29 +555,29 @@
                 topic: 'KEKOMPAKAN TIM & SOLIDARITAS',
                 title: 'Benteng Sahabat Nusantara',
                 storyHtml: `
-                    <p class="text-slate-700 leading-relaxed text-xs sm:text-sm mb-3">
-                        Sore menjelang, semilir angin barat berhembus kencang di pematang sawah. Layang-layang garuda gagah milik Budi dan layang-layang kupu-kupu pita merah milik Siti terbang membubung tinggi ke langit senja.
+                    <p class="leading-relaxed mb-3 font-medium">
+                        Sore menjelang, semilir angin barat berhembus kencang di sawah. Layang-layang garuda milik Budi dan layang-layang kupu-kupu pita merah Siti terbang membubung tinggi ke langit senja.
                     </p>
-                    <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 mb-3">
-                        <p class="text-xs text-slate-700 leading-relaxed mb-2">
-                            Setelah layang-layang ditambatkan aman, mereka bermain Gobak Sodor (Hadang). Tim penjaga merentangkan tangan menjaga garis benteng pertahanan.
+                    <div class="p-3.5 rounded-2xl bg-gradient-to-br from-sky-50/90 to-blue-50/60 border-2 border-sky-200 mb-3 space-y-1.5 shadow-2xs">
+                        <p class="text-xs text-sky-950">
+                            Setelah layang-layang ditambatkan aman, mereka bermain Gobak Sodor (Hadang). Tim penjaga merentangkan tangan menjaga garis benteng pertahanan!
                         </p>
-                        <p class="text-xs font-bold text-sky-800">
+                        <p class="text-xs font-extrabold text-blue-700">
                             Rian berlari lincah mengecoh penjaga garis, disambut sorak gembira Maya dan kawan-kawan!
                         </p>
                     </div>
-                    <div class="space-y-2 text-[11px] text-slate-600 mb-3">
-                        <div class="p-2 rounded-xl bg-white border border-slate-200">
-                            <strong class="text-slate-900 block font-bold">Kekompakan Tim:</strong>
-                            Tidak ada yang menang sendiri, semua bahu-membahu melindungi garis pertahanan.
+                    <div class="space-y-2 text-xs mb-3">
+                        <div class="p-2.5 rounded-xl bg-blue-50/80 border-2 border-blue-200 text-blue-950">
+                            <strong class="text-blue-700 block font-black mb-0.5">🛡️ Kekompakan Tim:</strong>
+                            Tidak ada yang menang sendiri, semua saling menjaga dan melindungi garis benteng!
                         </div>
-                        <div class="p-2 rounded-xl bg-white border border-slate-200">
-                            <strong class="text-slate-900 block font-bold">Tubuh Bugar &amp; Sehat:</strong>
-                            Keringat sehat mengalir, udara segar sawah membersihkan paru-paru anak.
+                        <div class="p-2.5 rounded-xl bg-teal-50/80 border-2 border-teal-200 text-teal-950">
+                            <strong class="text-teal-700 block font-black mb-0.5">🌱 Tubuh Bugar &amp; Sehat:</strong>
+                            Keringat sehat mengalir, udara segar sawah membuat dada terasa lapang.
                         </div>
                     </div>
-                    <div class="p-2.5 rounded-xl bg-sky-50 border border-sky-200 text-sky-950 text-[11px] font-semibold text-center">
-                        "Sahabat sejati adalah mereka yang tertawa dan berjuang bersama di bawah langit biru!"
+                    <div class="p-3 rounded-2xl bg-gradient-to-r from-sky-500 via-indigo-500 to-purple-600 text-white text-xs font-black text-center shadow-md">
+                        "Sahabat sejati adalah mereka yang tertawa dan berjuang bersama di bawah langit biru!" 🪁
                     </div>
                 `
             },
@@ -590,9 +697,9 @@
                                 <line x1="275" y1="256" x2="275" y2="272" stroke="#92400E" stroke-width="3.5"/>
                             </svg>
                         </div>
-                        <div class="mt-3 p-3 rounded-2xl bg-slate-50 border border-slate-200 text-center">
-                            <span class="text-xs font-bold text-slate-800 block">Pemandangan Kampung Sukamaju</span>
-                            <span class="text-[11px] text-slate-500">Tempat bermain anak yang hijau, sejuk, dan penuh kehangatan kearifan lokal.</span>
+                        <div class="mt-3 p-3 rounded-2xl bg-gradient-to-r from-indigo-50/90 via-purple-50/70 to-amber-50/60 border border-indigo-100 text-center shadow-2xs">
+                            <span class="text-xs font-black text-indigo-950 block">Pemandangan Kampung Sukamaju</span>
+                            <span class="text-[11px] text-indigo-600/90 font-medium">Tempat bermain anak yang hijau, sejuk, dan penuh kehangatan kearifan lokal.</span>
                         </div>
                     </div>
                 `;
@@ -631,9 +738,9 @@
                                 <line x1="285" y1="198" x2="280" y2="210" stroke="#991B1B" stroke-width="4" stroke-linecap="round"/>
                             </svg>
                         </div>
-                        <div class="mt-3 p-3 rounded-2xl bg-slate-50 border border-slate-200 text-center">
-                            <span class="text-xs font-bold text-slate-800 block">Pola Lapangan Engklek Nusantara</span>
-                            <span class="text-[11px] text-slate-500">Anak melompat satu kaki melewati kotak dengan seimbang dan gembira.</span>
+                        <div class="mt-3 p-3 rounded-2xl bg-gradient-to-r from-amber-50/90 via-orange-50/70 to-emerald-50/60 border border-amber-200 text-center shadow-2xs">
+                            <span class="text-xs font-black text-amber-950 block">Pola Lapangan Engklek Nusantara</span>
+                            <span class="text-[11px] text-amber-700/90 font-medium">Anak melompat satu kaki melewati kotak dengan seimbang dan gembira.</span>
                         </div>
                     </div>
                 `;
@@ -669,9 +776,9 @@
                                 <line x1="184" y1="131" x2="198" y2="175" stroke="#1E3A8A" stroke-width="4"/>
                             </svg>
                         </div>
-                        <div class="mt-3 p-3 rounded-2xl bg-slate-50 border border-slate-200 text-center">
-                            <span class="text-xs font-bold text-slate-800 block">Kecakapan Egrang Tradisional</span>
-                            <span class="text-[11px] text-slate-500">Berdiri tinggi melatih keberanian, koordinasi mata, dan ketenangan jiwa.</span>
+                        <div class="mt-3 p-3 rounded-2xl bg-gradient-to-r from-emerald-50/90 via-teal-50/70 to-lime-50/60 border border-emerald-200 text-center shadow-2xs">
+                            <span class="text-xs font-black text-emerald-950 block">Kecakapan Egrang Tradisional</span>
+                            <span class="text-[11px] text-emerald-700/90 font-medium">Berdiri tinggi melatih keberanian, koordinasi mata, dan ketenangan jiwa.</span>
                         </div>
                     </div>
                 `;
@@ -700,9 +807,9 @@
                                 <line x1="270" y1="84" x2="255" y2="92" stroke="#FCD34D" stroke-width="3.5" stroke-linecap="round"/>
                             </svg>
                         </div>
-                        <div class="mt-3 p-3 rounded-2xl bg-slate-50 border border-slate-200 text-center">
-                            <span class="text-xs font-bold text-slate-800 block">Dendang Gasing Kayu Tradisional</span>
-                            <span class="text-[11px] text-slate-500">Sentakan tali melahirkan gaya sentrifugal seimbang yang memukau.</span>
+                        <div class="mt-3 p-3 rounded-2xl bg-gradient-to-r from-violet-50/90 via-purple-50/70 to-indigo-50/60 border border-violet-200 text-center shadow-2xs">
+                            <span class="text-xs font-black text-violet-950 block">Dendang Gasing Kayu Tradisional</span>
+                            <span class="text-[11px] text-violet-700/90 font-medium">Sentakan tali melahirkan gaya sentrifugal seimbang yang memukau.</span>
                         </div>
                     </div>
                 `;
@@ -745,9 +852,9 @@
                                 <circle cx="146" cy="126" r="4" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1"/>
                             </svg>
                         </div>
-                        <div class="mt-3 p-3 rounded-2xl bg-slate-50 border border-slate-200 text-center">
-                            <span class="text-xs font-bold text-slate-800 block">Papan Congklak Ukir Nusantara</span>
-                            <span class="text-[11px] text-slate-500">Membagikan biji kerang mengajarkan taktik hitung dan budi pekerti jujur.</span>
+                        <div class="mt-3 p-3 rounded-2xl bg-gradient-to-r from-rose-50/90 via-pink-50/70 to-amber-50/60 border border-rose-200 text-center shadow-2xs">
+                            <span class="text-xs font-black text-rose-950 block">Papan Congklak Ukir Nusantara</span>
+                            <span class="text-[11px] text-rose-700/90 font-medium">Membagikan biji kerang mengajarkan taktik hitung dan budi pekerti jujur.</span>
                         </div>
                     </div>
                 `;
@@ -776,9 +883,9 @@
                                 <line x1="120" y1="75" x2="70" y2="225" stroke="#94A3B8" stroke-width="1" stroke-dasharray="2 2"/>
                             </svg>
                         </div>
-                        <div class="mt-3 p-3 rounded-2xl bg-slate-50 border border-slate-200 text-center">
-                            <span class="text-xs font-bold text-slate-800 block">Keceriaan Langit &amp; Benteng Gobak Sodor</span>
-                            <span class="text-[11px] text-slate-500">Meliuk bebas bersama angin sore dan kekompakan solidaritas regu.</span>
+                        <div class="mt-3 p-3 rounded-2xl bg-gradient-to-r from-sky-50/90 via-indigo-50/70 to-rose-50/60 border border-sky-200 text-center shadow-2xs">
+                            <span class="text-xs font-black text-sky-950 block">Keceriaan Langit &amp; Benteng Gobak Sodor</span>
+                            <span class="text-[11px] text-sky-700/90 font-medium">Meliuk bebas bersama angin sore dan kekompakan solidaritas regu.</span>
                         </div>
                     </div>
                 `;
@@ -787,43 +894,43 @@
             if (type === 'quiz') {
                 return `
                     <div class="w-full h-full flex flex-col justify-between">
-                        <div class="p-3.5 bg-slate-50 rounded-2xl border border-slate-200 mb-3">
-                            <h4 class="font-extrabold text-xs text-indigo-950 mb-2 flex items-center gap-1.5">
-                                <span class="w-2 h-2 rounded-full bg-indigo-600"></span>
-                                Pertanyaan 1:
+                        <div class="p-3.5 bg-gradient-to-br from-indigo-50/90 to-purple-50/60 rounded-2xl border-2 border-indigo-200/80 mb-3 shadow-2xs">
+                            <h4 class="font-extrabold text-xs text-indigo-900 mb-2 flex items-center gap-1.5">
+                                <span class="w-2.5 h-2.5 rounded-full bg-indigo-600 animate-pulse"></span>
+                                🌟 Pertanyaan 1:
                             </h4>
-                            <p class="text-xs text-slate-700 mb-2 font-medium">
+                            <p class="text-xs text-indigo-950 mb-2.5 font-bold">
                                 Permainan melompat satu kaki di kotak kapur berbentuk sayap pesawat adalah...
                             </p>
-                            <div class="grid grid-cols-1 gap-1.5">
-                                <button onclick="answerQuiz(1, 0, 1, this)" class="text-left px-3 py-2 rounded-xl text-xs font-bold bg-white border border-slate-200 hover:bg-indigo-50 transition-colors text-slate-700">
+                            <div class="grid grid-cols-1 gap-2">
+                                <button onclick="answerQuiz(1, 0, 1, this)" class="text-left px-3.5 py-2 rounded-xl text-xs font-black bg-white border-2 border-indigo-200 hover:border-indigo-400 hover:bg-indigo-50/80 text-indigo-900 transition-all shadow-2xs active:scale-[0.98]">
                                     A. Gasing Kayu
                                 </button>
-                                <button onclick="answerQuiz(1, 1, 1, this)" class="text-left px-3 py-2 rounded-xl text-xs font-bold bg-white border border-slate-200 hover:bg-indigo-50 transition-colors text-slate-700">
-                                    B. Engklek / Sundamanda
+                                <button onclick="answerQuiz(1, 1, 1, this)" class="text-left px-3.5 py-2 rounded-xl text-xs font-black bg-white border-2 border-indigo-200 hover:border-indigo-400 hover:bg-indigo-50/80 text-indigo-900 transition-all shadow-2xs active:scale-[0.98]">
+                                    B. Engklek / Sundamanda ⭐
                                 </button>
-                                <button onclick="answerQuiz(1, 2, 1, this)" class="text-left px-3 py-2 rounded-xl text-xs font-bold bg-white border border-slate-200 hover:bg-indigo-50 transition-colors text-slate-700">
+                                <button onclick="answerQuiz(1, 2, 1, this)" class="text-left px-3.5 py-2 rounded-xl text-xs font-black bg-white border-2 border-indigo-200 hover:border-indigo-400 hover:bg-indigo-50/80 text-indigo-900 transition-all shadow-2xs active:scale-[0.98]">
                                     C. Congklak Dakon
                                 </button>
                             </div>
                         </div>
 
-                        <div class="p-3.5 bg-slate-50 rounded-2xl border border-slate-200">
-                            <h4 class="font-extrabold text-xs text-indigo-950 mb-2 flex items-center gap-1.5">
-                                <span class="w-2 h-2 rounded-full bg-indigo-600"></span>
-                                Pertanyaan 2:
+                        <div class="p-3.5 bg-gradient-to-br from-amber-50/90 to-yellow-50/60 rounded-2xl border-2 border-amber-200/80 shadow-2xs">
+                            <h4 class="font-extrabold text-xs text-amber-900 mb-2 flex items-center gap-1.5">
+                                <span class="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse"></span>
+                                🌟 Pertanyaan 2:
                             </h4>
-                            <p class="text-xs text-slate-700 mb-2 font-medium">
+                            <p class="text-xs text-amber-950 mb-2.5 font-bold">
                                 Benda kayu yang diputar kencang dengan tarikan tali hingga berdengung merdu adalah...
                             </p>
-                            <div class="grid grid-cols-1 gap-1.5">
-                                <button onclick="answerQuiz(2, 0, 0, this)" class="text-left px-3 py-2 rounded-xl text-xs font-bold bg-white border border-slate-200 hover:bg-indigo-50 transition-colors text-slate-700">
-                                    A. Gasing Kayu Jati
+                            <div class="grid grid-cols-1 gap-2">
+                                <button onclick="answerQuiz(2, 0, 0, this)" class="text-left px-3.5 py-2 rounded-xl text-xs font-black bg-white border-2 border-amber-200 hover:border-amber-400 hover:bg-amber-50/80 text-amber-950 transition-all shadow-2xs active:scale-[0.98]">
+                                    A. Gasing Kayu Jati ⭐
                                 </button>
-                                <button onclick="answerQuiz(2, 1, 0, this)" class="text-left px-3 py-2 rounded-xl text-xs font-bold bg-white border border-slate-200 hover:bg-indigo-50 transition-colors text-slate-700">
+                                <button onclick="answerQuiz(2, 1, 0, this)" class="text-left px-3.5 py-2 rounded-xl text-xs font-black bg-white border-2 border-amber-200 hover:border-amber-400 hover:bg-amber-50/80 text-amber-950 transition-all shadow-2xs active:scale-[0.98]">
                                     B. Egrang Bambu
                                 </button>
-                                <button onclick="answerQuiz(2, 2, 0, this)" class="text-left px-3 py-2 rounded-xl text-xs font-bold bg-white border border-slate-200 hover:bg-indigo-50 transition-colors text-slate-700">
+                                <button onclick="answerQuiz(2, 2, 0, this)" class="text-left px-3.5 py-2 rounded-xl text-xs font-black bg-white border-2 border-amber-200 hover:border-amber-400 hover:bg-amber-50/80 text-amber-950 transition-all shadow-2xs active:scale-[0.98]">
                                     C. Layang-layang
                                 </button>
                             </div>
@@ -840,16 +947,17 @@
             const parent = btn.parentElement;
             parent.querySelectorAll('button').forEach(b => {
                 b.disabled = true;
-                b.className = 'text-left px-3 py-2 rounded-xl text-xs font-bold border border-slate-200 opacity-60 text-slate-500 bg-white';
+                b.className = 'text-left px-3.5 py-2 rounded-xl text-xs font-bold border-2 border-slate-200 opacity-60 text-slate-400 bg-slate-50';
             });
 
             if (selectedIndex === correctIndex) {
-                btn.className = 'text-left px-3 py-2 rounded-xl text-xs font-bold bg-emerald-500 text-white shadow-md border border-emerald-600';
-                btn.innerHTML += ' &bull; Hebat, Jawabanmu Benar!';
+                btn.className = 'text-left px-3.5 py-2 rounded-xl text-xs font-black bg-emerald-500 text-white shadow-lg border-2 border-emerald-600 scale-[1.02] transition-transform';
+                btn.innerHTML += ' ✨ Hebat Sekali, Jawabanmu Benar!';
             } else {
-                btn.className = 'text-left px-3 py-2 rounded-xl text-xs font-bold bg-rose-500 text-white shadow-md border border-rose-600';
-                btn.innerHTML += ' &bull; Masih Belum Tepat';
-                parent.children[correctIndex].className = 'text-left px-3 py-2 rounded-xl text-xs font-bold bg-emerald-100 text-emerald-900 border border-emerald-400 font-extrabold';
+                btn.className = 'text-left px-3.5 py-2 rounded-xl text-xs font-black bg-rose-500 text-white shadow-lg border-2 border-rose-600';
+                btn.innerHTML += ' ❌ Belum Tepat, Semangat Ya!';
+                parent.children[correctIndex].className = 'text-left px-3.5 py-2 rounded-xl text-xs font-black bg-emerald-100 text-emerald-950 border-2 border-emerald-400';
+                parent.children[correctIndex].innerHTML += ' ✨ (Jawaban Benar)';
             }
         };
 
@@ -922,43 +1030,44 @@
             const rightData = BOOK_PAGES.find(p => p.pageNumber === spread.right);
 
             root.innerHTML = `
-                <div class="flex flex-row items-stretch w-[94vw] max-w-4xl lg:max-w-5xl h-[68vh] sm:h-[72vh] max-h-[630px] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-white/10 transition-all duration-300">
+                <div class="flex flex-row items-stretch w-[96vw] max-w-4xl lg:max-w-5xl xl:max-w-6xl h-[72vh] sm:h-[78vh] max-h-[730px] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-white/10 transition-all duration-300">
                     
-                    <div class="book-page-white w-1/2 h-full relative flex flex-col justify-between p-4 sm:p-7 border-r border-slate-200">
+                    <div class="book-page-white w-1/2 h-full relative flex flex-col justify-between p-4 sm:p-7 border-r border-indigo-100">
                         <div class="absolute inset-y-0 right-0 w-8 spine-shadow-left pointer-events-none z-10"></div>
 
-                        <div class="flex items-center justify-between pb-2 border-b border-slate-200 mb-2.5">
-                            <span class="text-[10px] sm:text-xs font-extrabold uppercase tracking-wider text-indigo-700">
+                        <div class="flex items-center justify-between pb-2 border-b-2 border-indigo-100/70 mb-2.5">
+                            <span class="text-[10px] sm:text-xs font-black uppercase tracking-wider text-indigo-700 bg-indigo-50 border border-indigo-200/80 px-2.5 py-0.5 rounded-full shadow-2xs">
                                 ${leftData.topic}
                             </span>
-                            <span class="text-[10px] sm:text-xs font-bold text-slate-400">
+                            <span class="text-[10px] sm:text-xs font-black text-amber-700 bg-amber-50 px-2.5 py-0.5 rounded-full border border-amber-200">
                                 Hal ${leftData.pageNumber}
                             </span>
                         </div>
 
                         <div class="flex-1 overflow-y-auto custom-scroll pr-1 flex flex-col justify-between">
-                            <h3 class="font-display font-extrabold text-slate-900 text-sm sm:text-base lg:text-lg mb-2">
-                                ${leftData.title}
+                            <h3 class="font-display font-black text-indigo-950 text-sm sm:text-base lg:text-lg mb-2 flex items-center gap-2">
+                                <span class="inline-block w-2.5 h-2.5 rounded-full bg-gradient-to-r from-amber-400 to-rose-400 shadow-xs"></span>
+                                <span>${leftData.title}</span>
                             </h3>
                             <div class="flex-1">
                                 ${getVectorIllustration(leftData.vectorType)}
                             </div>
                         </div>
 
-                        <div class="pt-2 border-t border-slate-100 flex items-center justify-between text-[10px] text-slate-400 font-medium">
-                            <span>Buku Cerita Anak Nusantara</span>
-                            <span class="font-bold text-slate-500">${leftData.pageNumber}</span>
+                        <div class="pt-2 border-t border-indigo-50 flex items-center justify-between text-[11px] text-indigo-400 font-extrabold">
+                            <span class="flex items-center gap-1.5"><span class="text-amber-400">✨</span> Buku Cerita Anak Nusantara</span>
+                            <span class="font-black text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-md border border-indigo-100">${leftData.pageNumber}</span>
                         </div>
                     </div>
 
                     <div class="book-page-white w-1/2 h-full relative flex flex-col justify-between p-4 sm:p-7">
                         <div class="absolute inset-y-0 left-0 w-8 spine-shadow-right pointer-events-none z-10"></div>
 
-                        <div class="flex items-center justify-between pb-2 border-b border-slate-200 mb-2.5">
-                            <span class="text-[10px] sm:text-xs font-bold text-slate-400">
+                        <div class="flex items-center justify-between pb-2 border-b-2 border-indigo-100/70 mb-2.5">
+                            <span class="text-[10px] sm:text-xs font-black text-amber-700 bg-amber-50 px-2.5 py-0.5 rounded-full border border-amber-200">
                                 Hal ${rightData.pageNumber}
                             </span>
-                            <span class="text-[10px] sm:text-xs font-extrabold uppercase tracking-wider text-indigo-700">
+                            <span class="text-[10px] sm:text-xs font-black uppercase tracking-wider text-indigo-700 bg-indigo-50 border border-indigo-200/80 px-2.5 py-0.5 rounded-full shadow-2xs">
                                 ${rightData.topic}
                             </span>
                         </div>
@@ -967,9 +1076,9 @@
                             ${renderRightPageContent(rightData)}
                         </div>
 
-                        <div class="pt-2 border-t border-slate-100 flex items-center justify-between text-[10px] text-slate-400 font-medium">
-                            <span class="font-bold text-slate-500">${rightData.pageNumber}</span>
-                            <span>CintaBaca Edukasi</span>
+                        <div class="pt-2 border-t border-indigo-50 flex items-center justify-between text-[11px] text-indigo-400 font-extrabold">
+                            <span class="font-black text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-md border border-indigo-100">${rightData.pageNumber}</span>
+                            <span class="flex items-center gap-1.5">CintaBaca Edukasi <span class="text-amber-400">⭐</span></span>
                         </div>
                     </div>
 
@@ -981,27 +1090,29 @@
             if (data.type === 'backcover') {
                 return `
                     <div class="h-full flex flex-col justify-between text-center py-2">
-                        <div class="w-16 h-16 sm:w-20 sm:h-20 mx-auto rounded-3xl bg-amber-100 border border-amber-300 flex items-center justify-center text-3xl mb-2 shadow-xs">
+                        <div class="w-16 h-16 sm:w-20 sm:h-20 mx-auto rounded-3xl bg-gradient-to-br from-amber-100 to-yellow-200 border-2 border-amber-300 flex items-center justify-center text-3xl mb-2 shadow-md">
                             🏆
                         </div>
-                        <h4 class="font-extrabold text-sm sm:text-base text-slate-900 mb-1">
-                            Kamu Sahabat Cilik Pelestari Budaya!
+                        <h4 class="font-black text-base sm:text-lg text-indigo-950 mb-1">
+                            Kamu Sahabat Cilik Pelestari Budaya! ⭐
                         </h4>
-                        <p class="text-slate-600 text-[11px] sm:text-xs leading-relaxed mb-3">
+                        <p class="text-indigo-900/80 text-xs sm:text-sm leading-relaxed mb-3 font-medium">
                             Selamat! Kamu telah menamatkan petualangan 5 permainan tradisional Indonesia. Sekarang, mari ajak teman dan keluarga bermain bersama di halaman rumah!
                         </p>
-                        <div class="p-3 bg-slate-50 rounded-2xl border border-slate-200 text-slate-800 text-xs mb-3 text-left space-y-1">
-                            <div class="font-bold text-indigo-900">Rangkuman Warisan Nusantara:</div>
-                            <div class="text-[11px] text-slate-600">• Engklek (Keseimbangan) &bull; Egrang (Keberanian)</div>
-                            <div class="text-[11px] text-slate-600">• Gasing (Ketelitian) &bull; Congklak (Kejujuran)</div>
-                            <div class="text-[11px] text-slate-600">• Layang-layang &amp; Gobak Sodor (Kekompakan)</div>
+                        <div class="p-3.5 bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 rounded-2xl border-2 border-indigo-200/80 text-indigo-950 text-xs mb-3 text-left space-y-1.5 shadow-2xs">
+                            <div class="font-black text-indigo-900 flex items-center gap-1.5">
+                                <span class="text-base">🌟</span> Rangkuman Warisan Nusantara:
+                            </div>
+                            <div class="text-xs text-indigo-800">• <strong>Engklek</strong> (Keseimbangan) &bull; <strong>Egrang</strong> (Keberanian)</div>
+                            <div class="text-xs text-indigo-800">• <strong>Gasing</strong> (Ketelitian) &bull; <strong>Congklak</strong> (Kejujuran)</div>
+                            <div class="text-xs text-indigo-800">• <strong>Layang-layang &amp; Gobak Sodor</strong> (Kekompakan Tim)</div>
                         </div>
-                        <div class="flex justify-center gap-2">
-                            <button onclick="goToPage(1)" class="px-4 py-2 rounded-xl text-xs font-extrabold text-white bg-indigo-600 hover:bg-indigo-700 shadow-md transition-transform active:scale-95 cursor-pointer">
-                                🔄 Baca Ulang
+                        <div class="flex justify-center gap-2.5">
+                            <button onclick="goToPage(1)" class="px-4 py-2.5 rounded-xl text-xs font-black text-slate-950 bg-amber-400 hover:bg-amber-300 shadow-md transition-transform active:scale-95 cursor-pointer flex items-center gap-1.5">
+                                <span>🔄</span> Baca Ulang
                             </button>
-                            <a href="./detail-buku.html" class="px-4 py-2 rounded-xl text-xs font-extrabold text-slate-700 bg-white border border-slate-300 hover:bg-slate-50 transition-colors">
-                                🏠 Selesai
+                            <a href="./detail-buku.html" class="px-4 py-2.5 rounded-xl text-xs font-black text-indigo-900 bg-white border-2 border-indigo-200 hover:bg-indigo-50 transition-colors shadow-2xs flex items-center gap-1.5">
+                                <span>🏠</span> Selesai
                             </a>
                         </div>
                     </div>
@@ -1010,8 +1121,9 @@
 
             return `
                 <div>
-                    <h3 class="font-display font-extrabold text-slate-900 text-sm sm:text-base lg:text-lg mb-2">
-                        ${data.title}
+                    <h3 class="font-display font-black text-indigo-950 text-sm sm:text-base lg:text-lg mb-2 flex items-center gap-2">
+                        <span class="inline-block w-2.5 h-2.5 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 shadow-xs"></span>
+                        <span>${data.title}</span>
                     </h3>
                     ${data.storyHtml}
                 </div>
@@ -1084,6 +1196,17 @@
                 if (autoPlayTimer) clearInterval(autoPlayTimer);
             }
         }
+
+        const FONT_SCALES = [1.0, 1.15, 1.25, 1.4, 1.6];
+        let currentFontScaleIndex = 2; // Default 125%
+
+        window.changeFontSize = function(delta) {
+            currentFontScaleIndex = Math.max(0, Math.min(FONT_SCALES.length - 1, currentFontScaleIndex + delta));
+            const scale = FONT_SCALES[currentFontScaleIndex];
+            document.documentElement.style.setProperty('--text-scale', scale);
+            const label = document.getElementById('font-size-label');
+            if (label) label.textContent = Math.round(scale * 100) + '%';
+        };
 
         function toggleFullscreen() {
             if (!document.fullscreenElement) {

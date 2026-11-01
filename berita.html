@@ -32,7 +32,9 @@
     <!-- Fonts: Plus Jakarta Sans & Outfit -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,400;0,700;1,400;1,700&family=Fredoka:wght@400;500;600;700&family=Nunito:wght@500;600;700;800;900&display=swap" rel="stylesheet">
 
     <style>
         :root {
@@ -42,8 +44,25 @@
             --surface-warm: #FFFDF9;
             --ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
         }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; color: #334155; }
-        .font-display { font-family: 'Outfit', sans-serif; letter-spacing: -0.02em; }
+                body {
+            font-family: 'Baloo 2', 'Quicksand', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: #2e265c;
+            letter-spacing: 0.01em;
+        }
+        h1, h2, h3, h4, h5, h6, .font-display, .font-serif-title {
+            font-family: 'Fredoka', 'Quicksand', sans-serif !important;
+            letter-spacing: 0.015em;
+        }
+        p, li, span, input, button, select, textarea {
+            font-family: 'Baloo 2', 'Fredoka', 'Quicksand', sans-serif;
+        }
+
+        /* Harmonize Text Colors - Vibrant & Friendly (No Harsh Black) */
+        .text-slate-900, .text-gray-900, .text-stone-900 { color: #1e1548 !important; }
+        .text-slate-800, .text-gray-800, .text-stone-800 { color: #2a205a !important; }
+        .text-slate-700, .text-gray-700, .text-stone-700 { color: #392f6b !important; }
+        .text-slate-600, .text-gray-600, .text-stone-600 { color: #554a85 !important; }
+        .text-slate-500, .text-gray-500, .text-stone-500 { color: #7369a0 !important; }
         .line-clamp-2 {
             display: -webkit-box;
             -webkit-line-clamp: 2;
@@ -68,6 +87,68 @@
         ::-webkit-scrollbar-track { background: #FFFDF9; }
         ::-webkit-scrollbar-thumb { background: #C7D2FE; border-radius: 3px; }
         ::-webkit-scrollbar-thumb:hover { background: #4F46E5; }
+    
+        /* Child-Friendly Text Colors (Vibrant, Warm, No Harsh Black/Gray) */
+        body {
+            color: #382c6c;
+        }
+
+        /* Headings in Warm Playful Tones */
+        h1:not(.text-white), h2:not(.text-white), h3:not(.text-white), h4:not(.text-white), h5:not(.text-white), h6:not(.text-white) {
+            color: #241c5d;
+        }
+
+        /* Replace dull black/slate classes with cheerful blueberry, indigo & plum tones */
+        .text-slate-900:not(.text-white):not([class*="text-amber"]):not([class*="text-emerald"]):not([class*="text-cyan"]),
+        .text-gray-900:not(.text-white):not([class*="text-amber"]):not([class*="text-emerald"]):not([class*="text-cyan"]),
+        .text-stone-900:not(.text-white):not([class*="text-amber"]):not([class*="text-emerald"]):not([class*="text-cyan"]),
+        .text-black:not(.text-white) {
+            color: #241c5d !important;
+        }
+
+        .text-slate-800:not(.text-white):not(.text-blue-100),
+        .text-gray-800:not(.text-white):not(.text-blue-100),
+        .text-stone-800:not(.text-white):not(.text-blue-100) {
+            color: #352b72 !important;
+        }
+
+        .text-slate-700:not(.text-white):not(.text-blue-100),
+        .text-gray-700:not(.text-white):not(.text-blue-100),
+        .text-stone-700:not(.text-white):not(.text-blue-100) {
+            color: #493b8c !important;
+        }
+
+        .text-slate-600:not(.text-white):not(.text-blue-100):not(.text-blue-200),
+        .text-gray-600:not(.text-white):not(.text-blue-100):not(.text-blue-200),
+        .text-stone-600:not(.text-white):not(.text-blue-100):not(.text-blue-200) {
+            color: #5c4d9e !important;
+        }
+
+        .text-slate-500:not(.text-white):not(.text-blue-200):not(.text-blue-300),
+        .text-gray-500:not(.text-white):not(.text-blue-200):not(.text-blue-300),
+        .text-stone-500:not(.text-white):not(.text-blue-200):not(.text-blue-300) {
+            color: #7464b5 !important;
+        }
+
+        .text-slate-400:not(.text-white):not(.text-blue-300),
+        .text-gray-400:not(.text-white):not(.text-blue-300) {
+            color: #8c7ec7 !important;
+        }
+
+        /* Hide scrollbars cleanly for filter bars and horizontal lists */
+        .no-scrollbar::-webkit-scrollbar,
+        #filter-tags-news::-webkit-scrollbar,
+        #category-pills::-webkit-scrollbar {
+            display: none !important;
+            width: 0 !important;
+            height: 0 !important;
+        }
+        .no-scrollbar,
+        #filter-tags-news,
+        #category-pills {
+            -ms-overflow-style: none !important;
+            scrollbar-width: none !important;
+        }
     </style>
 </head>
 <body class="bg-white text-slate-800 antialiased">
@@ -313,20 +394,20 @@
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                     
                     <!-- Category Pills -->
-                    <div class="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden" id="filter-tags-news">
+                    <div class="flex flex-wrap items-center gap-2 no-scrollbar" id="filter-tags-news">
                         <button type="button" class="filter-tag active px-4 py-2 rounded-xl text-xs font-bold transition-all bg-indigo-600 text-white shadow-xs cursor-pointer flex-shrink-0" data-cat="semua" onclick="filterBerita('semua', this)">
                             Semua Kabar
                         </button>
-                        <button type="button" class="filter-tag px-4 py-2 rounded-xl text-xs font-bold transition-all bg-[#FFFCF7] text-slate-700 hover:bg-orange-50 border border-orange-200/60 cursor-pointer flex-shrink-0" data-cat="Event" onclick="filterBerita('Event', this)">
+                        <button type="button" class="filter-tag px-4 py-2 rounded-xl text-xs font-bold transition-all bg-[#FFFCF7] text-slate-700 hover:bg-orange-50 border border-orange-200/60 cursor-pointer flex-shrink-0" class="filter-tag px-4 py-2 rounded-xl text-xs font-bold transition-all bg-[#FFFCF7] text-amber-700 hover:bg-orange-50 border border-orange-200/60 cursor-pointer flex-shrink-0" data-cat="Event" onclick="filterBerita('Event', this)">
                             Event &amp; Festival
                         </button>
-                        <button type="button" class="filter-tag px-4 py-2 rounded-xl text-xs font-bold transition-all bg-[#FFFCF7] text-slate-700 hover:bg-orange-50 border border-orange-200/60 cursor-pointer flex-shrink-0" data-cat="Literasi" onclick="filterBerita('Literasi', this)">
+                        <button type="button" class="filter-tag px-4 py-2 rounded-xl text-xs font-bold transition-all bg-[#FFFCF7] text-slate-700 hover:bg-orange-50 border border-orange-200/60 cursor-pointer flex-shrink-0" class="filter-tag px-4 py-2 rounded-xl text-xs font-bold transition-all bg-[#FFFCF7] text-purple-700 hover:bg-orange-50 border border-orange-200/60 cursor-pointer flex-shrink-0" data-cat="Literasi" onclick="filterBerita('Literasi', this)">
                             Literasi &amp; Dongeng
                         </button>
-                        <button type="button" class="filter-tag px-4 py-2 rounded-xl text-xs font-bold transition-all bg-[#FFFCF7] text-slate-700 hover:bg-orange-50 border border-orange-200/60 cursor-pointer flex-shrink-0" data-cat="Perpustakaan" onclick="filterBerita('Perpustakaan', this)">
+                        <button type="button" class="filter-tag px-4 py-2 rounded-xl text-xs font-bold transition-all bg-[#FFFCF7] text-slate-700 hover:bg-orange-50 border border-orange-200/60 cursor-pointer flex-shrink-0" class="filter-tag px-4 py-2 rounded-xl text-xs font-bold transition-all bg-[#FFFCF7] text-emerald-700 hover:bg-orange-50 border border-orange-200/60 cursor-pointer flex-shrink-0" data-cat="Perpustakaan" onclick="filterBerita('Perpustakaan', this)">
                             Tips &amp; Edukasi
                         </button>
-                        <button type="button" class="filter-tag px-4 py-2 rounded-xl text-xs font-bold transition-all bg-[#FFFCF7] text-slate-700 hover:bg-orange-50 border border-orange-200/60 cursor-pointer flex-shrink-0" data-cat="Teknologi" onclick="filterBerita('Teknologi', this)">
+                        <button type="button" class="filter-tag px-4 py-2 rounded-xl text-xs font-bold transition-all bg-[#FFFCF7] text-slate-700 hover:bg-orange-50 border border-orange-200/60 cursor-pointer flex-shrink-0" class="filter-tag px-4 py-2 rounded-xl text-xs font-bold transition-all bg-[#FFFCF7] text-sky-700 hover:bg-orange-50 border border-orange-200/60 cursor-pointer flex-shrink-0" data-cat="Teknologi" onclick="filterBerita('Teknologi', this)">
                             Fitur &amp; Teknologi
                         </button>
                     </div>
